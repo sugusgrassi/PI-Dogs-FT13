@@ -56,7 +56,6 @@ Temperamentos
 
 async function addDog(req, res, next){
     const  {name, weight, height, life_span, temperament } = req.body;
-    console.log(req.body)
     const id = uuidv4();
     try {
         const createdDog = await Dog.create({
@@ -82,7 +81,7 @@ async function addDog(req, res, next){
         //   return res.render('error', {message: "Mensaje de error"});
         // }
     
-        res.send(newDogTemp);
+        res.json(newDogTemp);
     } catch(error) {
         next(error)
     }

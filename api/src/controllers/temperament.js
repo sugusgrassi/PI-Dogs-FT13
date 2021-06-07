@@ -35,12 +35,11 @@ const apiKey = process.env.API_KEY;
             })
             }
         )
-        console.log(tempArr)
-       
+    
         Temperament.bulkCreate(tempArr).then(() => { 
             return Temperament.findAll();
           }).then(result => {
-            res.send(result)
+            res.json(result)
           })
           .catch((error) => next(error));
         
