@@ -58,38 +58,35 @@ async function addDog(req, res, next){
     const  {name, weight, height, life_span, temperament } = req.body;
     console.log(req.body)
     const id = uuidv4();
-
-    const createdDog = await Dog.create({
-        id,
-        name,
-        weight,
-        height,
-        life_span
-    });
-
-    const createdTemperament = await Temperament.create({
-        id,
-        temperament
-    });
-
-
-    // await createdDog.setTemperament(Temperament);
-
-    const newDogTemp = {...createdDog, createdTemperament}
-    // const createdTemperament = await Temperament.create({
-    //     id,
-    //     temperament
-    // });
-  
-    // //.findOrCreate genera un arreglo con lo encontrado o creado entonces > [0] ya que el email es único
-    // await userCreated[0].addPage(pageCreated);
-    // await pageCreated.setCategories(categories);
-  
-    // if (!name || !weight || !height || !life_span || !temperament){
-    //   return res.render('error', {message: "Mensaje de error"});
-    // }
-
-    res.send(newDogTemp);
+    try {
+        const createdDog = await Dog.create({
+            id,
+            name,
+            weight,
+            height,
+            life_span
+        });
+    
+        const createdTemperament = await Temperament.create({
+            id,
+            temperament
+        });
+    
+        await createdDog.addTemperament(createdTemperament);
+        // =
+        // await createdTemperament.addDog(createdDog);
+    
+        const newDogTemp = {...createdDog, createdTemperament}
+      
+        // if (!name || !weight || !height || !life_span || !temperament){
+        //   return res.render('error', {message: "Mensaje de error"});
+        // }
+    
+        res.send(newDogTemp);
+    } catch(error) {
+        next(error)
+    }
+    
 }
 
 

@@ -14,13 +14,57 @@ function getAllDogs(req, res, next){
     Promise.all([dogFromApi, dogFromDB])
     .then((response) => {
         let [dogFromApiResponse, dogFromDBResponse] = response;
-        res.send(dogFromDBResponse.concat(dogFromApiResponse.data))
+        let whoLetTheDogsOut = dogFromDBResponse.concat(dogFromApiResponse.data);
+   
+        if (req.query.name) {
+
+            var filteredDogs = whoLetTheDogsOut.filter(o =>
+                o.name.toLowerCase().includes(req.query.name.toLowerCase()));
+            return res.send(filteredDogs)
+
+            //     console.log(filteredDogs)
+            // var dogArr = []
+            // for (var dog of dogFromApiResponse.data) {
+
+            //     if (dog.temperament.includes(req.query.name) || 
+            //         dog.name.includes(req.query.name) ||
+            //         dog.bred_for.includes(req.query.name) ||
+            //         dog.breed_group.includes(req.query.name)
+            //         ){
+            //             dogArr.push(dog)
+                        
+            //         }
+            //         return res.send(dogArr)
+                
+            // no funciona
+            // function filterByValue(array, string) {
+            //     return array.filter(o =>
+            //         Object.keys(o).some(k => o[k].toLowerCase().includes(string.toLowerCase())));
+            // }
+            // console.log(filterByValue(whoLetTheDogsOut, req.query.name));
+
+
+
+                // for (var key in dog){
+                //     var item = dog[key];
+                //     if (typeof item === 'object'){
+                //         console.log("es un objeto")
+                //     }
+                //     else if (item === req.query.name){
+                //         return res.send(dog)
+                //     }
+                // }
+            // }
+
+    
+        }
+        res.send(whoLetTheDogsOut)
     })
     .catch((error) => next(error));
 
 }
 
-async function dogById(req, res){
+async function dogById(req, res, next){
     const dogFromApi = axios.get(`${BASE_URL}?api_key=${apiKey}`)    
     const dogFromDB = Dog.findAll(); 
     
@@ -41,14 +85,13 @@ async function dogById(req, res){
     })
     .catch((error) => next(error));
     
-
 }
 
 async function addDog(req, res, next){
     console.log("hola")
     const id = uuidv4();
     const newDog = {...req.body, id}
-    console.log(newDog)
+
     try {
         const createdDog = await Dog.create(newDog)
         return res.send(createdDog)
