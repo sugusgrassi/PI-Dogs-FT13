@@ -55,7 +55,7 @@ Temperamentos
 // }
 
 async function addDog(req, res, next){
-    const  {name, weight, height, life_span, temperament } = req.body;
+    const  {name, weight, height, life_span, temperament, image } = req.body;
     const id = uuidv4();
     try {
         const createdDog = await Dog.create({
@@ -63,7 +63,8 @@ async function addDog(req, res, next){
             name,
             weight,
             height,
-            life_span
+            life_span,
+            image
         });
     
         const createdTemperament = await Temperament.create({

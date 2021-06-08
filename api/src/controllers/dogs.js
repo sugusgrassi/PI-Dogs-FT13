@@ -70,6 +70,7 @@ async function dogById(req, res, next){
                     delete dog.bred_for;
                     delete dog.description;
                     delete dog.history;
+                    delete dog.country_code;
                     dog.image = dog.image.url;
                     dog.weight = dog.weight.metric;
                     dog.height = dog.height.metric;
@@ -120,6 +121,7 @@ function simplifiedDog(firstEight){
             delete dog.bred_for;
             delete dog.description;
             delete dog.history;
+            delete dog.country_code;
             dog.image = dog.image.url;
             dog.weight = dog.weight.metric;
             dog.height = dog.height.metric;
