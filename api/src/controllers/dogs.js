@@ -23,9 +23,19 @@ function getAllDogs(req, res, next){
             
             if (filteredDogs.length > 0) {
                 // let firstEight = filteredDogs.splice(0, 8);
-                let firstEight = filteredDogs;
-                simplifiedDog(firstEight) // trae los datos necesarios
-                return res.json(firstEight)
+                
+                
+                if (!req.query.page) {
+                    let firstEight = filteredDogs.splice(0, 8);
+                    simplifiedDog(firstEight);
+                    return res.json(firstEight);
+                }
+
+                simplifiedDog(filteredDogs);
+                const page = req.query.page;
+                const limit = req.query.limit;
+                const result = filteredDogs.splice(page, limit);
+                return res.json(result);
             } else {
                 return res.status(404).send(`Ups, we couldn't find the 
                 specimen ${req.query.name} 😬, but if it's a dog you can post it 😉`)
@@ -33,16 +43,22 @@ function getAllDogs(req, res, next){
             
         }
 
-        // let firstEight = whoLetTheDogsOut.splice(0, 8);
-        let firstEight = whoLetTheDogsOut;
-        simplifiedDog(firstEight)  // trae los datos necesarios
+        if (!req.query.page) {
+            let firstEight = whoLetTheDogsOut.splice(0, 8);
+            simplifiedDog(firstEight);
+            return res.json(firstEight);
+        }
+
+
+        simplifiedDog(whoLetTheDogsOut)  // trae los datos necesarios
         // https://medium.com/learnfactory-nigeria/create-a-pagination-middleware-with-node-js-fe4ec5dca80f
         const page = req.query.page;
         const limit = req.query.limit;
-        const startIndex = (page - 1) * limit;
-        const endIndex = page * limit;
-        const result = firstEight.splice(startIndex, endIndex);
-        res.json(result);
+        // const startIndex = (page - 1) * limit;
+        // const endIndex = page * limit;
+        // const result = firstEight.splice(startIndex, endIndex);
+        const result = whoLetTheDogsOut.splice(page, limit);
+        return res.json(result);
 
     })
     .catch((error) => next(error)); 
@@ -55,7 +71,7 @@ async function dogById(req, res, next){
         if (req.params.id.length > 3) {
         await Dog.findByPk(req.params.id, {include: Temperament}).then(dog => {
             if(dog) {
-                var {id, name, height, weight, life_span, temperaments} = dog;
+                var {id, name, height, weight, life_span, temperaments, image} = dog;
                 var temperament = temperaments[0].temperament;
                 return res.json({
                     id, 
@@ -63,7 +79,8 @@ async function dogById(req, res, next){
                     height,
                     weight,
                     life_span,
-                    temperament
+                    temperament,
+                    image
                 })
             }
         })
@@ -72,18 +89,11 @@ async function dogById(req, res, next){
             const response = await axios.get(`${BASE_URL}?api_key=${apiKey}`)
             for (var dog of response.data) {                
                 if (dog.id == req.params.id){
-                    delete dog.origin;
-                    delete dog.breed_group;
-                    delete dog.reference_image_id;
-                    delete dog.bred_for;
-                    delete dog.description;
-                    delete dog.history;
-                    delete dog.country_code;
                     dog.image = dog.image.url;
                     dog.weight = dog.weight.metric;
                     dog.height = dog.height.metric;
                     var {id, name, height, weight, life_span, temperament, image} = dog;
-                    res.json({
+                    return res.json({
                         id, 
                         name, 
                         height,
@@ -120,9 +130,10 @@ module.exports = {
     addDog
 }
 
-function simplifiedDog(firstEight){
-    for (var dog of firstEight){
+function simplifiedDog(dogs){
+    for (var dog of dogs){
         if (typeof dog.id === "number") {
+            // desectructuring and then save it in a new variable
             delete dog.origin;
             delete dog.breed_group;
             delete dog.reference_image_id;
@@ -141,7 +152,6 @@ function simplifiedDog(firstEight){
             delete dog.dataValues.temperaments;
         }
     }
-    return firstEight;
 }
 
 // llamado solo a la api
@@ -184,4 +194,31 @@ function simplifiedDog(firstEight){
 //     })
 //     .catch((error) => next(error));
     
+// }
+
+
+
+// Destructuring y salvarlo en una nueva variable. no conviene queda una var global
+// var dogArr = [] // 
+// function simplifiedDog(firstEight){
+
+//     for (var dog of firstEight){
+//         if (typeof dog.id === "number") {
+//             
+//             dog.image = dog.image.url;
+//             dog.weight = dog.weight.metric;
+//             dog.height = dog.height.metric;
+//             var {id, name, height, weight, life_span, temperament, image} = dog;
+//             doggy = {
+//                 id, name, height, weight, life_span, temperament, image
+//             }
+//             dogArr.push(doggy)
+//         }
+//         else {
+//             delete dog.dataValues.createdAt;
+//             delete dog.dataValues.updatedAt;
+//             dog.dataValues.temperament = dog.dataValues.temperaments[0].temperament;
+//             delete dog.dataValues.temperaments;
+//         }
+//     }
 // }
