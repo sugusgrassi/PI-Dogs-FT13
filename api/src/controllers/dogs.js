@@ -23,8 +23,7 @@ function getAllDogs(req, res, next){
             
             if (filteredDogs.length > 0) {
                 let firstEight = filteredDogs.slice(0, 8);
-
-
+                simplifiedDog(firstEight) // trae los datos necesarios
                 return res.json(firstEight)
             } else {
                 return res.status(404).send(`Ups, we couldn't find the 
@@ -32,27 +31,11 @@ function getAllDogs(req, res, next){
             }
             
         }
+
         let firstEight = whoLetTheDogsOut.slice(0, 8);
-        // console.log(firstEight)
-        for (var dog of firstEight){
-            if (typeof dog.id === "number") {
-                delete dog.origin;
-                delete dog.breed_group;
-                delete dog.reference_image_id;
-                delete dog.bred_for;
-                dog.image = dog.image.url;
-                dog.weight = dog.weight.metric;
-                dog.height = dog.height.metric;
-            }
-            else {
-                console.log(dog.dataValues)
-                delete dog.dataValues.createdAt;
-                delete dog.dataValues.updatedAt;
-                dog.dataValues.temperament = dog.dataValues.temperaments[0].temperament;
-                delete dog.dataValues.temperaments;
-            }
-        }
+        simplifiedDog(firstEight)  // trae los datos necesarios
         res.json(firstEight)
+
     })
     .catch((error) => next(error)); 
 
@@ -61,7 +44,7 @@ function getAllDogs(req, res, next){
 async function dogById(req, res, next){
 
     try {
-    
+        if (req.params.id.length > 3) {
         await Dog.findByPk(req.params.id, {include: Temperament}).then(dog => {
             if(dog) {
                 var {id, name, height, weight, life_span, temperaments} = dog;
@@ -75,31 +58,39 @@ async function dogById(req, res, next){
                     temperament
                 })
             }
-            setTimeout(function() {
-                throw new Error();
-            }, 4000)})
-        
-    } catch (error) {
-        if(error) {
+        })
+        } else {
             console.log("La DB no lo tiene entonces vamos a la API")
             const response = await axios.get(`${BASE_URL}?api_key=${apiKey}`)
             for (var dog of response.data) {                
                 if (dog.id == req.params.id){
-                    var {id, name, height, weight, life_span, temperament} = dog;
+                    delete dog.origin;
+                    delete dog.breed_group;
+                    delete dog.reference_image_id;
+                    delete dog.bred_for;
+                    delete dog.description;
+                    delete dog.history;
+                    dog.image = dog.image.url;
+                    dog.weight = dog.weight.metric;
+                    dog.height = dog.height.metric;
+                    var {id, name, height, weight, life_span, temperament, image} = dog;
                     res.json({
                         id, 
                         name, 
                         height,
                         weight,
                         life_span,
-                        temperament
+                        temperament,
+                        image
                     })  
+                }
             }
-            }
-
-          } 
-      }
-     
+        }
+    } catch (error) {
+        if(error) {
+                return res.status(404).json({ error: `Specimen with id ${req.params.id} not found 😬`})
+        }  
+    }
 }
 
 async function addDog(req, res, next){
@@ -120,7 +111,28 @@ module.exports = {
     addDog
 }
 
-
+function simplifiedDog(firstEight){
+    for (var dog of firstEight){
+        if (typeof dog.id === "number") {
+            delete dog.origin;
+            delete dog.breed_group;
+            delete dog.reference_image_id;
+            delete dog.bred_for;
+            delete dog.description;
+            delete dog.history;
+            dog.image = dog.image.url;
+            dog.weight = dog.weight.metric;
+            dog.height = dog.height.metric;
+        }
+        else {
+            delete dog.dataValues.createdAt;
+            delete dog.dataValues.updatedAt;
+            dog.dataValues.temperament = dog.dataValues.temperaments[0].temperament;
+            delete dog.dataValues.temperaments;
+        }
+    }
+    return firstEight;
+}
 
 // llamado solo a la api
 // function getAllDogs(req, res, next){
