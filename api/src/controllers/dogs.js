@@ -22,7 +22,8 @@ function getAllDogs(req, res, next){
                 o.name.toLowerCase().includes(req.query.name.toLowerCase()));
             
             if (filteredDogs.length > 0) {
-                let firstEight = filteredDogs.slice(0, 8);
+                // let firstEight = filteredDogs.splice(0, 8);
+                let firstEight = filteredDogs;
                 simplifiedDog(firstEight) // trae los datos necesarios
                 return res.json(firstEight)
             } else {
@@ -32,9 +33,16 @@ function getAllDogs(req, res, next){
             
         }
 
-        let firstEight = whoLetTheDogsOut.slice(0, 8);
+        // let firstEight = whoLetTheDogsOut.splice(0, 8);
+        let firstEight = whoLetTheDogsOut;
         simplifiedDog(firstEight)  // trae los datos necesarios
-        res.json(firstEight)
+        // https://medium.com/learnfactory-nigeria/create-a-pagination-middleware-with-node-js-fe4ec5dca80f
+        const page = req.query.page;
+        const limit = req.query.limit;
+        const startIndex = (page - 1) * limit;
+        const endIndex = page * limit;
+        const result = firstEight.splice(startIndex, endIndex);
+        res.json(result);
 
     })
     .catch((error) => next(error)); 
