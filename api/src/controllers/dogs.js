@@ -26,15 +26,21 @@ function getAllDogs(req, res, next){
                 
                 
                 if (!req.query.page) {
-                    let firstEight = filteredDogs.splice(0, 8);
+                    let firstEight = filteredDogs.slice(0, 8);
                     simplifiedDog(firstEight);
                     return res.json(firstEight);
                 }
 
                 simplifiedDog(filteredDogs);
-                const page = req.query.page;
-                const limit = req.query.limit;
-                const result = filteredDogs.splice(page, limit);
+                
+                const page = parseInt(req.query.page)
+                const limit = parseInt(req.query.limit)
+                const startIndex = (page - 1) * limit;
+                const endIndex = limit * page;
+                console.log(startIndex);
+                console.log(endIndex);
+                const result = filteredDogs.slice(startIndex, endIndex);
+                
                 return res.json(result);
             } else {
                 return res.status(404).send(`Ups, we couldn't find the 
@@ -44,7 +50,7 @@ function getAllDogs(req, res, next){
         }
 
         if (!req.query.page) {
-            let firstEight = whoLetTheDogsOut.splice(0, 8);
+            let firstEight = whoLetTheDogsOut.slice(0, 8);
             simplifiedDog(firstEight);
             return res.json(firstEight);
         }
@@ -52,12 +58,14 @@ function getAllDogs(req, res, next){
 
         simplifiedDog(whoLetTheDogsOut)  // trae los datos necesarios
         // https://medium.com/learnfactory-nigeria/create-a-pagination-middleware-with-node-js-fe4ec5dca80f
-        const page = req.query.page;
-        const limit = req.query.limit;
-        // const startIndex = (page - 1) * limit;
-        // const endIndex = page * limit;
-        // const result = firstEight.splice(startIndex, endIndex);
-        const result = whoLetTheDogsOut.splice(page, limit);
+        const page = parseInt(req.query.page)
+        const limit = parseInt(req.query.limit)
+        const startIndex = (page - 1) * limit;
+        const endIndex = limit * page;
+        console.log(startIndex);
+        console.log(endIndex);
+        const result = whoLetTheDogsOut.slice(startIndex, endIndex);
+        
         return res.json(result);
 
     })
