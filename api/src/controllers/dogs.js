@@ -23,8 +23,7 @@ function getAllDogs(req, res, next){
             
             if (filteredDogs.length > 0) {
                 // let firstEight = filteredDogs.splice(0, 8);
-                
-                
+                 
                 if (!req.query.page) {
                     let firstEight = filteredDogs.slice(0, 8);
                     simplifiedDog(firstEight);
@@ -73,6 +72,7 @@ function getAllDogs(req, res, next){
 
 }
 
+// https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await#awaiting_a_promise.all
 async function dogById(req, res, next){
 
     try {
