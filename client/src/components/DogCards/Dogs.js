@@ -1,13 +1,13 @@
 import React from 'react'
 
-const Dogs = ({ dogs, loading}) => {
+const Dogs = ({ currentDogs, loading}) => {
     if (loading) {
         return <h2>Loading...</h2>
     }
     return (
         <ul>
-            {dogs.map(dog => (
-            <li key={dog.id}>{dog.name}</li>
+            {currentDogs.map(currentDogs => (
+            <li key={currentDogs.id}>{currentDogs.name}</li>
             ))}
         </ul>
     )

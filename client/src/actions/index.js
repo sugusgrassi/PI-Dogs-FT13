@@ -2,7 +2,7 @@ import axios from 'axios';
 import {BASE_URL} from '../constants.js';
 
 export const GET_DOGS = "GET_DOGS";
-
+export const PAGINATE_DOGS = "PAGINATE_DOGS";
 
 export function getDogs(){
     return function(dispatch) {
@@ -12,10 +12,13 @@ export function getDogs(){
                 type: GET_DOGS,
                 payload: response.data
             })
-        })
+        }).catch(error => console.log(error))
     }
 }
 
+export function paginate(payload) {
+    return { type: PAGINATE_DOGS, payload };
+}
 
 // Con fetch
 // export function getDogs(){
