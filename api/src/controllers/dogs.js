@@ -25,7 +25,8 @@ function getAllDogs(req, res, next){
                 // let firstEight = filteredDogs.splice(0, 8);
                  
                 if (!req.query.page) {
-                    let firstEight = filteredDogs.slice(0, 8);
+                    // let firstEight = filteredDogs.slice(0, 8);
+                    let firstEight = filteredDogs;
                     simplifiedDog(firstEight);
                     return res.json(firstEight);
                 }
@@ -49,7 +50,9 @@ function getAllDogs(req, res, next){
         }
 
         if (!req.query.page) {
-            let firstEight = whoLetTheDogsOut.slice(0, 8);
+            // let firstEight = whoLetTheDogsOut.slice(0, 8);
+            // Pagination in the front
+            let firstEight = whoLetTheDogsOut;
             simplifiedDog(firstEight);
             return res.json(firstEight);
         }
