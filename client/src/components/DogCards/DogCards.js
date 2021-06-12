@@ -8,8 +8,13 @@ function DogCards(props) {
     const {getDogs, dogs, loading, dogsPerPage, currentPage} = props;
     // const [currentPage, setCurrentPage] = useState([1]);
 
+    // si str = "" trae todos
+    // si le agrego page limit trae el páginado del back
+    let str = "";
+    // let str = "?name=Terrier";
+
     useEffect(() => {
-    getDogs()
+    getDogs(str)
     // props.paginate(1)
     }, []);
 

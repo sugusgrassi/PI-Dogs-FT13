@@ -4,9 +4,9 @@ import {BASE_URL} from '../constants.js';
 export const GET_DOGS = "GET_DOGS";
 export const PAGINATE_DOGS = "PAGINATE_DOGS";
 
-export function getDogs(){
-    return function(dispatch) {
-        return axios.get(BASE_URL)
+export function getDogs(str){
+        return function(dispatch) {
+        return axios.get(BASE_URL + str)
         .then((response) => {
             dispatch({ 
                 type: GET_DOGS,

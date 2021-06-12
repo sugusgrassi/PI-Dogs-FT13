@@ -1,10 +1,14 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import {BASE_URL} from './constants.js';
 import DogCards from './components/DogCards/DogCards.js';
-import Dogs from './components/DogCards/Dogs';
-import Pagination from './components/Pagination/Pagination';
+import { Route } from "react-router";
+import Landing from './components/Landing/Landing';
+import DogContainer from './components/DogContainer/DogContainer';
+import Nav from './components/Nav/Nav';
+import Find from './components/Find/Find';
+import AddDog from './components/AddDog/AddDog';
+import Footer from './components/Footer/Footer';
+import About from './components/About/About';
 
 function App() {
 
@@ -35,10 +39,16 @@ function App() {
   
   return (
     <div className="App">
-      <h1>Henry Dogs</h1>
+      <Route path="/" exact component={Landing} />
+      <Route path="/" component={Nav} />
+      <Route path="/dogs" component={DogContainer} />
+      <Route path="/find" component={Find} />
+      <Route path="/add" component={AddDog} />
+      <Route path="/about" component={About} />
+      <Route path="/" component={Footer} />
       {/* <Dogs currentDogs={currentDogs} loading={loading} /> */}
       {/* <Pagination dogsPerPage={dogsPerPage} totalDogs={dogs.length} paginate={paginate} /> */}
-      <DogCards />
+      {/* <DogCards /> */}
     </div>
   );
 }
