@@ -10,6 +10,8 @@ import AddDog from './components/AddDog/AddDog';
 import Footer from './components/Footer/Footer';
 import About from './components/About/About';
 import E404 from './components/E404/E404';
+import Temperaments from './components/Temperaments/Temperaments';
+
 
 function App() {
 
@@ -44,9 +46,10 @@ function App() {
       <Route path="/" component={Nav} />
       <Switch>
         <Route path="/dogs" component={DogContainer} />
-        {/* <Route path="/find" component={Find} /> */}
+        <Route path="/find" component={Find} />
         <Route path="/add" component={AddDog} />
         <Route path="/about" component={About} />
+        <Route path="/temperaments" component={Temperaments} />
         <Route path="*" component={E404} status={404}/>
       </Switch>
       <Route path="/" component={Footer} />

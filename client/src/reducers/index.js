@@ -1,7 +1,8 @@
-import { GET_DOGS, PAGINATE_DOGS, STOP_LOADING } from "../actions/index";
+import { GET_DOGS, PAGINATE_DOGS, STOP_LOADING, GET_TEMP } from "../actions/index";
 
 const initialState = {
     dogs: [],
+    temperaments: [],
     loading: true,
     currentPage: 1,
     dogsPerPage: 8
@@ -13,6 +14,12 @@ function rootReducer(state = initialState, action){
             ...state,
             dogs: action.payload,
             loading: false
+        }
+    }
+    if (action.type === GET_TEMP) {
+        return {
+            ...state,
+            temperaments: action.payload
         }
     }
     if (action.type === PAGINATE_DOGS) {
@@ -27,6 +34,7 @@ function rootReducer(state = initialState, action){
             loading: false
         }
     }
+    
     return state;
 }
 

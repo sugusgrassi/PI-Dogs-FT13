@@ -10,13 +10,14 @@ function DogCards(props) {
 
     // si str = "" trae todos
     // si le agrego page limit trae el páginado del back
-    let str = "";
+
+    // let str = "23erf";
     // let str = "?name=Terrier";
 
-    useEffect(() => {
-    getDogs(str)
-    // props.paginate(1)
-    }, []);
+    // useEffect(() => {
+    // getDogs(str)
+    // // props.paginate(1)
+    // }, []);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -24,6 +25,8 @@ function DogCards(props) {
         }, 4000);
         return () => clearTimeout(timer);
       }, []);
+
+
 
     const indexOfLastDog = currentPage *  dogsPerPage;
     const indexOfFirstDog = indexOfLastDog - dogsPerPage;
@@ -54,7 +57,7 @@ function DogCards(props) {
                       </div>
               </div>
           ))}
-      </div>) : <h1>We couldn't find any dog</h1>}
+      </div>) : <h1>The network is not working and we couldn't catch any dog, please try later</h1>}
       <Pagination totalDogs={dogs.length} />
       {/* <nav>
             <ul >

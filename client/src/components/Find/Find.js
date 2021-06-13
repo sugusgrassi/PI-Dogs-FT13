@@ -15,17 +15,22 @@ const Find = (props) => {
         props.getDogs("?name="+breedName)
       }
 
-    // Algunos no los encuentra:
-    //   useEffect(() => {
-    //     console.log("componentDidUpdate: se modificó el state")
-    //     props.getDogs("?name="+breedName)
-    //   },[breedName])
+      useEffect(() => {
+        console.log("componentDidUpdate: se modificó el state")
+        props.getDogs("?name="+breedName)
+      
+      },[breedName])
 
+      function handleFormReset(event) {
+        event.preventDefault();
+        setBreedName("")
+        props.getDogs("")
+      }
 
     return (
         <div>
             <h1>Find a breed by name, temperament or word</h1>
-            <form className="" onSubmit={(e) => handleSubmit(e)}>
+            <form className="" onSubmit={(e) => handleSubmit(e)} onReset={(e) => handleFormReset(e)}>
         <div>
           <label className="" htmlFor="breedName">Breed? </label>
           <input
@@ -37,10 +42,15 @@ const Find = (props) => {
           />
         </div>
         <button type="submit">Find</button>
+        <input
+            type="reset"
+            value="Reset"
+          />
       </form>
         </div>
     )
 }
+
 
 export default connect(
     null,
