@@ -2,10 +2,10 @@
 import React, { useEffect } from 'react';
 import Pagination from '../Pagination/Pagination'
 import { connect } from 'react-redux';
-import { getDogs, paginate } from '../../actions/index';
+import { getDogs, paginate, stopLoading } from '../../actions/index';
 
 function DogCards(props) {
-    const {getDogs, dogs, loading, dogsPerPage, currentPage} = props;
+    const {getDogs, dogs, loading, dogsPerPage, currentPage, stopLoading} = props;
     // const [currentPage, setCurrentPage] = useState([1]);
 
     // si str = "" trae todos
@@ -18,7 +18,12 @@ function DogCards(props) {
     // props.paginate(1)
     }, []);
 
-
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            stopLoading();
+        }, 4000);
+        return () => clearTimeout(timer);
+      }, []);
 
     const indexOfLastDog = currentPage *  dogsPerPage;
     const indexOfFirstDog = indexOfLastDog - dogsPerPage;
@@ -31,12 +36,12 @@ function DogCards(props) {
   }
 
     if (loading) {
-      return <h2>Who let the dogs out?! ...</h2>
+      return <h2>Loading...</h2>
     }
-  
+
     return (
 <div>
-      <div>
+      {currentDogs.length > 0  ? (<div>
           {currentDogs.map((dog) => (
               <div key={dog.id}>
                   {/* <img src={dog.image} alt={dog.name} /> */}
@@ -49,7 +54,7 @@ function DogCards(props) {
                       </div>
               </div>
           ))}
-      </div>
+      </div>) : <h1>We couldn't find any dog</h1>}
       <Pagination totalDogs={dogs.length} />
       {/* <nav>
             <ul >
@@ -80,7 +85,7 @@ function mapStateToProps(state) {
 
 export default connect(
     mapStateToProps,
-    {getDogs, paginate}
+    {getDogs, paginate, stopLoading}
   )(DogCards);
 
 

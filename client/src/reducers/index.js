@@ -1,4 +1,4 @@
-import { GET_DOGS, PAGINATE_DOGS } from "../actions/index";
+import { GET_DOGS, PAGINATE_DOGS, STOP_LOADING } from "../actions/index";
 
 const initialState = {
     dogs: [],
@@ -19,6 +19,12 @@ function rootReducer(state = initialState, action){
         return {
             ...state,
             currentPage: action.payload
+        }
+    }
+    if (action.type === STOP_LOADING){
+        return {
+            ...state,
+            loading: false
         }
     }
     return state;

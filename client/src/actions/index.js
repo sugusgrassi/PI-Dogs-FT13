@@ -3,6 +3,7 @@ import {BASE_URL} from '../constants.js';
 
 export const GET_DOGS = "GET_DOGS";
 export const PAGINATE_DOGS = "PAGINATE_DOGS";
+export const STOP_LOADING = "STOP_LOADING";
 
 export function getDogs(str){
         return function(dispatch) {
@@ -18,6 +19,10 @@ export function getDogs(str){
 
 export function paginate(payload) {
     return { type: PAGINATE_DOGS, payload };
+}
+
+export function stopLoading(payload) {
+    return { type: STOP_LOADING, payload };
 }
 
 // Con fetch

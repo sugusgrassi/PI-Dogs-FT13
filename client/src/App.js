@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import DogCards from './components/DogCards/DogCards.js';
-import { Route } from "react-router";
+import { Route, Switch } from "react-router";
 import Landing from './components/Landing/Landing';
 import DogContainer from './components/DogContainer/DogContainer';
 import Nav from './components/Nav/Nav';
@@ -9,6 +9,7 @@ import Find from './components/Find/Find';
 import AddDog from './components/AddDog/AddDog';
 import Footer from './components/Footer/Footer';
 import About from './components/About/About';
+import E404 from './components/E404/E404';
 
 function App() {
 
@@ -41,11 +42,15 @@ function App() {
     <div className="App">
       <Route path="/" exact component={Landing} />
       <Route path="/" component={Nav} />
-      <Route path="/dogs" component={DogContainer} />
-      <Route path="/find" component={Find} />
-      <Route path="/add" component={AddDog} />
-      <Route path="/about" component={About} />
+      <Switch>
+        <Route path="/dogs" component={DogContainer} />
+        {/* <Route path="/find" component={Find} /> */}
+        <Route path="/add" component={AddDog} />
+        <Route path="/about" component={About} />
+        <Route path="*" component={E404} status={404}/>
+      </Switch>
       <Route path="/" component={Footer} />
+     
       {/* <Dogs currentDogs={currentDogs} loading={loading} /> */}
       {/* <Pagination dogsPerPage={dogsPerPage} totalDogs={dogs.length} paginate={paginate} /> */}
       {/* <DogCards /> */}
