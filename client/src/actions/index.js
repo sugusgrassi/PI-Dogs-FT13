@@ -5,6 +5,7 @@ export const GET_DOGS = "GET_DOGS";
 export const PAGINATE_DOGS = "PAGINATE_DOGS";
 export const STOP_LOADING = "STOP_LOADING";
 export const GET_TEMP = "GET_TEMP";
+export const SET_TEMP_DOG = "SET_TEMP_DOG";
 
 export function getDogs(str){
     return function(dispatch) {
@@ -37,6 +38,10 @@ export function paginate(payload) {
 
 export function stopLoading(payload) {
     return { type: STOP_LOADING, payload };
+}
+
+export function setTempDog(payload) {
+    return { type: SET_TEMP_DOG, payload };
 }
 
 // Con fetch

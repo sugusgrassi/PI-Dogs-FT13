@@ -1,7 +1,8 @@
-import { GET_DOGS, PAGINATE_DOGS, STOP_LOADING, GET_TEMP } from "../actions/index";
+import { GET_DOGS, PAGINATE_DOGS, STOP_LOADING, GET_TEMP, SET_TEMP_DOG } from "../actions/index";
 
 const initialState = {
     dogs: [],
+    selectedTempDogs: [],
     temperaments: [],
     loading: true,
     currentPage: 1,
@@ -28,10 +29,16 @@ function rootReducer(state = initialState, action){
             currentPage: action.payload
         }
     }
-    if (action.type === STOP_LOADING){
+    if (action.type === STOP_LOADING) {
         return {
             ...state,
             loading: false
+        }
+    }
+    if (action.type === SET_TEMP_DOG) {
+        return {
+            ...state,
+            selectedTempDogs: action.payload
         }
     }
     
