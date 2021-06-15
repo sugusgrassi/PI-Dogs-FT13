@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { getDogs, paginate, stopLoading, setTempDog } from '../../actions/index';
 
 function DogCards(props) {
-    const {getDogs, dogs, loading, dogsPerPage, currentPage, stopLoading, selectedTempDogs, setTempDog, paginate, zA} = props;
+    const {dogs, loading, dogsPerPage, currentPage, stopLoading, selectedTempDogs, zA} = props;
     // const [currentPage, setCurrentPage] = useState([1]);
 
     // si str = "" trae todos
@@ -23,7 +23,7 @@ function DogCards(props) {
       }, []);
 
 
-    // function compare( b, a ) {
+    // function compareAZ( b, a ) {
     // if ( a.weight < b.weight ){
     //     return -1;
     // }
@@ -41,54 +41,40 @@ function DogCards(props) {
     if ( a.name > b.name ){
         comparison = 1;
     }
-    return comparison * -1;
+    if (!zA){
+    return comparison * 1
+    } else {
+    return comparison * -1
+    };
     }
 
 
-    // setTempDog(dogs)
     let currentDogs;
     const indexOfLastDog = currentPage *  dogsPerPage;
     const indexOfFirstDog = indexOfLastDog - dogsPerPage;
     if (selectedTempDogs.length > 0){
-        if (zA){
+
         selectedTempDogs.sort( compare );
-    }
+
     currentDogs = selectedTempDogs.slice(indexOfFirstDog, indexOfLastDog);
     
     } else {
-        if (zA){
+       
         dogs.sort( compare );
-    }
+
         currentDogs = dogs.slice(indexOfFirstDog, indexOfLastDog);
     }
-    // const paginate = (number) => setCurrentPage(number)
-//     const pageNumbers =[];
-//     for (let i = 1; i <= Math.ceil(dogs.length / dogsPerPage); i++) {
-//       pageNumbers.push(i);
-//   }
 
-
-// useEffect(() => {
-//     // getDogs(str)
-//     paginate(1)
-//     }, []);
-
-// console.log(currentPage)
-// //  console.log(currentDogs)
 
     if (loading) {
       return <h2>Loading...</h2>
     }
 
 
-
-
-
     return (
-<div>
-
-          {currentDogs.length > 0  ? (<div>
-          {currentDogs.map((dog) => (
+        <div>
+            {currentDogs.length > 0  ? (<div>
+            {currentDogs.map((dog) => (
               <div key={dog.id}>
                   {/* <img src={dog.image} alt={dog.name} /> */}
                   <h2>{dog.name}</h2>
@@ -99,22 +85,10 @@ function DogCards(props) {
                           <span>{dog.life_span} </span>
                       </div>
               </div>
-          ))}
-      </div>) : <h3>The network is not working and we couldn't catch any dog, please try later</h3>}
-      {selectedTempDogs ? (<Pagination totalDogs={selectedTempDogs.length} />): <Pagination totalDogs={dogs.length} />} 
-      {/* <nav>
-            <ul >
-               {pageNumbers.map(number => (
-                   <li key={number} style={{display: "inline", margin: "0 5px"}}>
-                       <button onClick={() => props.paginate(number)} >
-                           {number} 
-                           
-                       </button>
-                   </li>
-               ))} 
-            </ul>   
-        </nav> */}
-</div>
+            ))}
+            </div>) : <h3>The network is not working and we couldn't catch any dog, please try later</h3>}
+            {selectedTempDogs ? (<Pagination totalDogs={selectedTempDogs.length} />): <Pagination totalDogs={dogs.length} />} 
+        </div>
     )
 
 }
