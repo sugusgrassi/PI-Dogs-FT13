@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
-import { getDogs, setTempDog} from '../../actions/index';
+import { getDogs, setTempDog, paginate} from '../../actions/index';
 
 const Find = (props) => {
 
@@ -12,12 +12,14 @@ const Find = (props) => {
       
       function handleSubmit(event) {
         event.preventDefault();
+        props.paginate(1)
         props.setTempDog("")
         props.getDogs("?name="+breedName)
       }
 
       useEffect(() => {
         console.log("componentDidUpdate: se modificó el state")
+        props.paginate(1)
         props.setTempDog("")
         props.getDogs("?name="+breedName)
       
@@ -28,6 +30,8 @@ const Find = (props) => {
         props.setTempDog("")
         setBreedName("")
         props.getDogs("")
+        props.paginate(1)
+
       }
 
     return (
@@ -57,5 +61,5 @@ const Find = (props) => {
 
 export default connect(
     null,
-    {getDogs, setTempDog}
+    {getDogs, setTempDog, paginate}
   )(Find);

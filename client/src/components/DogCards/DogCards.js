@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { getDogs, paginate, stopLoading, setTempDog } from '../../actions/index';
 
 function DogCards(props) {
-    const {getDogs, dogs, loading, dogsPerPage, currentPage, stopLoading, selectedTempDogs, setTempDog} = props;
+    const {getDogs, dogs, loading, dogsPerPage, currentPage, stopLoading, selectedTempDogs, setTempDog, paginate, zA} = props;
     // const [currentPage, setCurrentPage] = useState([1]);
 
     // si str = "" trae todos
@@ -14,10 +14,6 @@ function DogCards(props) {
     // let str = "23erf";
     // let str = "?name=Terrier";
 
-    // useEffect(() => {
-    // getDogs(str)
-    // // props.paginate(1)
-    // }, []);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -26,26 +22,67 @@ function DogCards(props) {
         return () => clearTimeout(timer);
       }, []);
 
+
+    // function compare( b, a ) {
+    // if ( a.weight < b.weight ){
+    //     return -1;
+    // }
+    // if ( a.weight > b.weight ){
+    //     return 1;
+    // }
+    // return 0;
+    // }
+    
+    function compare( a, b ) {
+        let comparison = 0;
+    if ( a.name < b.name ){
+        comparison = -1;
+    }
+    if ( a.name > b.name ){
+        comparison = 1;
+    }
+    return comparison * -1;
+    }
+
+
     // setTempDog(dogs)
     let currentDogs;
     const indexOfLastDog = currentPage *  dogsPerPage;
     const indexOfFirstDog = indexOfLastDog - dogsPerPage;
     if (selectedTempDogs.length > 0){
+        if (zA){
+        selectedTempDogs.sort( compare );
+    }
     currentDogs = selectedTempDogs.slice(indexOfFirstDog, indexOfLastDog);
-    console.log(indexOfLastDog)
+    
     } else {
+        if (zA){
+        dogs.sort( compare );
+    }
         currentDogs = dogs.slice(indexOfFirstDog, indexOfLastDog);
-        console.log(indexOfLastDog)
     }
     // const paginate = (number) => setCurrentPage(number)
 //     const pageNumbers =[];
 //     for (let i = 1; i <= Math.ceil(dogs.length / dogsPerPage); i++) {
 //       pageNumbers.push(i);
 //   }
- console.log(selectedTempDogs)
+
+
+// useEffect(() => {
+//     // getDogs(str)
+//     paginate(1)
+//     }, []);
+
+// console.log(currentPage)
+// //  console.log(currentDogs)
+
     if (loading) {
       return <h2>Loading...</h2>
     }
+
+
+
+
 
     return (
 <div>
@@ -56,10 +93,10 @@ function DogCards(props) {
                   {/* <img src={dog.image} alt={dog.name} /> */}
                   <h2>{dog.name}</h2>
                       <div>
-                          <span>{dog.temperament}</span>
-                          <span>{dog.height}</span>
-                          <span>{dog.weight}</span>
-                          <span>{dog.life_span}</span>
+                          <span>{dog.temperament} </span>
+                          <span>{dog.height} </span>
+                          <span>{dog.weight} </span>
+                          <span>{dog.life_span} </span>
                       </div>
               </div>
           ))}

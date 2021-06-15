@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
-import { getTemperaments, getDogs, setTempDog} from '../../actions/index';
+import { getTemperaments, getDogs, setTempDog, paginate} from '../../actions/index';
 
-function Temperaments({getTemperaments, temperaments, dogs, getDogs, setTempDog, selectedTempDogs}) {
+function Temperaments({getTemperaments, temperaments, dogs, getDogs, setTempDog, selectedTempDogs, paginate}) {
 
     useEffect(() => {
         getTemperaments()
         getDogs("")
       },[])
  
-      
-
+  
       
     function compareDogsTemp(e){
 
@@ -21,21 +20,24 @@ function Temperaments({getTemperaments, temperaments, dogs, getDogs, setTempDog,
           }
       }
       
-      
-          setTempDog(arrTempDogs.map((dog) => (
-            <div key={dog.id}>
-                {/* <img src={dog.image} alt={dog.name} /> */}
-                <h2>{dog.name}</h2>
-                    <div>
-                        <span>{dog.temperament}</span>
-                        <span>{dog.height}</span>
-                        <span>{dog.weight}</span>
-                        <span>{dog.life_span}</span>
-                    </div>
-            </div>
-            )))
+      // Cambia el state de selectedTempDogs en Redux, para llevarlo a la DogCards
+      setTempDog(arrTempDogs)
+        // setTempDog(arrTempDogs.map((dog) => (
+        //   <div key={dog.id}>
+        //       {/* <img src={dog.image} alt={dog.name} /> */}
+        //       <h2>{dog.name}</h2>
+        //           <div>
+        //               <span>{dog.temperament}</span>
+        //               <span>{dog.height}</span>
+        //               <span>{dog.weight}</span>
+        //               <span>{dog.life_span}</span>
+        //           </div>
+        //   </div>
+        //   )))
+        paginate(1)
     }
 
+ 
 
     return (
         <div>
@@ -48,7 +50,7 @@ function Temperaments({getTemperaments, temperaments, dogs, getDogs, setTempDog,
               >{temperament.temperament}</button>
           ))}
 
-          <div>hola {selectedTempDogs}</div>
+          {/* <div>hola {selectedTempDogs}</div> */}
 
         </div>
     )
@@ -64,5 +66,5 @@ function mapStateToProps(state) {
 
 export default connect(
     mapStateToProps,
-    {getTemperaments, getDogs, setTempDog}
+    {getTemperaments, getDogs, setTempDog, paginate}
   )(Temperaments);
