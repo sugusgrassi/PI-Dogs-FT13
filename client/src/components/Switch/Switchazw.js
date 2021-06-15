@@ -1,22 +1,22 @@
 import React from 'react';
 import './Switch.css';
 
-const Switch = ({ isOn, handleToggle }) => {
+const Switchazw = ({ azWeight, handleToggleazw }) => {
   return (
     <>
     <div>
         
           <input
-            checked={isOn}
-            onChange={handleToggle}
+            checked={azWeight}
+            onChange={handleToggleazw}
             className="react-switch-checkbox"
-            id={`react-switch-new1`}
+            id={`react-switch-new2`}
             type="checkbox"
           />
             <label
-            style={{ background: isOn && '#06D6A0' }}
+            style={{ background: azWeight && '#06D6A0' }}
             className="react-switch-label"
-            htmlFor={`react-switch-new1`}
+            htmlFor={`react-switch-new2`}
             >
             <span className={`react-switch-button`} />
           </label>
@@ -25,4 +25,4 @@ const Switch = ({ isOn, handleToggle }) => {
   );
 };
 
-export default Switch;
+export default Switchazw;

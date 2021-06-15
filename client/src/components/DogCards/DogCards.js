@@ -1,11 +1,10 @@
-
 import React, { useEffect } from 'react';
 import Pagination from '../Pagination/Pagination'
 import { connect } from 'react-redux';
 import { getDogs, paginate, stopLoading, setTempDog } from '../../actions/index';
 
 function DogCards(props) {
-    const {dogs, loading, dogsPerPage, currentPage, stopLoading, selectedTempDogs, zA} = props;
+    const {dogs, loading, dogsPerPage, currentPage, stopLoading, selectedTempDogs, zA, azWeight} = props;
     // const [currentPage, setCurrentPage] = useState([1]);
 
     // si str = "" trae todos
@@ -34,6 +33,7 @@ function DogCards(props) {
     // }
     
     function compare( a, b ) {
+    if (!azWeight) {
         let comparison = 0;
     if ( a.name < b.name ){
         comparison = -1;
@@ -45,7 +45,21 @@ function DogCards(props) {
     return comparison * 1
     } else {
     return comparison * -1
-    };
+    } } else {
+        let comparison = 0;
+        if ( a.weight < b.weight ){
+            comparison = -1;
+        }
+        if ( a.weight > b.weight ){
+            comparison = 1;
+        }
+        if (!zA){
+            return comparison * 1
+            } else {
+            return comparison * -1
+            }
+        
+    }
     }
 
 
@@ -80,9 +94,9 @@ function DogCards(props) {
                   <h2>{dog.name}</h2>
                       <div>
                           <span>{dog.temperament} </span>
-                          <span>{dog.height} </span>
-                          <span>{dog.weight} </span>
-                          <span>{dog.life_span} </span>
+                          <span>height:{dog.height} </span>
+                          <span>weight: {dog.weight} </span>
+                          <span>life_span: {dog.life_span} </span>
                       </div>
               </div>
             ))}
