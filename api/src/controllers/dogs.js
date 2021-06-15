@@ -15,6 +15,19 @@ function getAllDogs(req, res, next){
     .then((response) => {
         let [dogFromApiResponse, dogFromDBResponse] = response;
         let whoLetTheDogsOut = dogFromDBResponse.concat(dogFromApiResponse.data);
+
+        // Orden x nombre A-Z
+        function compare( a, b ) {
+            if ( a.name < b.name ){
+                return -1;
+            }
+            if ( a.name > b.name ){
+                return 1;
+            }
+            return 0;
+            }
+            
+            whoLetTheDogsOut.sort(compare)
    
         if (req.query.name) {
 
