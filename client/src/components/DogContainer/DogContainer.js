@@ -7,19 +7,19 @@ import Temperaments from '../Temperaments/Temperaments';
 import { connect } from 'react-redux';
 import { getDogs } from '../../actions/index';
 
-const DogContainer = (props) => {
+const DogContainer = () => {
     const [value, setValue] = useState(false);
     const [azWeight, setWeight] = useState(false);
     
 
     function handleChangeAZW() {
-        console.log("modificó el value")
+        // console.log("modificó el value")
         // props.getDogs("")
         setWeight(!azWeight)
         }
 
     function handleChange() {
-        console.log("modificó el value")
+        // console.log("modificó el value")
         // props.getDogs("")
         setValue(!value)
       }

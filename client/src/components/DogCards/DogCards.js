@@ -35,32 +35,33 @@ function DogCards(props) {
     function compare( a, b ) {
     if (!azWeight) {
         let comparison = 0;
-    if ( a.name < b.name ){
-        comparison = -1;
-    }
-    if ( a.name > b.name ){
-        comparison = 1;
-    }
-    if (!zA){
-    return comparison * 1
-    } else {
-    return comparison * -1
-    } } else {
-        let comparison = 0;
-        if ( a.weight < b.weight ){
+        if ( a.name < b.name ) {
             comparison = -1;
         }
-        if ( a.weight > b.weight ){
+        if ( a.name > b.name ) {
             comparison = 1;
         }
         if (!zA){
             return comparison * 1
-            } else {
+        } else {
             return comparison * -1
-            }
-        
+        } 
+    } else {
+        let comparison = 0;
+        if ( parseInt(a.weight.split(' ')[0]) < parseInt(b.weight.split(' ')[0]) ) {
+            comparison = -1;
+        }
+        if ( parseInt(a.weight.split(' ')[0]) > parseInt(b.weight.split(' ')[0]) ) {
+            comparison = 1;
+        }
+        if (!zA){
+            return comparison * 1
+        } else {
+            return comparison * -1
+        }
     }
     }
+   
 
 
     let currentDogs;
