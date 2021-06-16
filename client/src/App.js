@@ -51,7 +51,7 @@ function App() {
         <Route path="/find" component={Find} />
         <Route path="/add" component={AddDog} />
         <Route path="/about" component={About} />
-        <Route path="/temperaments" component={Temperaments} />
+        {/* <Route path="/temperaments" component={Temperaments} /> */}
         <Route path="*" component={E404} status={404}/>
       </Switch>
       <Route path="/" component={Footer} />

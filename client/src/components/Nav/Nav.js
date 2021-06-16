@@ -5,7 +5,7 @@ const Nav = () => {
     return (
         <nav>
             <Link to='/dogs'>Henry Dogs</Link>
-            <Link to='/temperaments'>Find Dog by temperament</Link>
+            {/* <Link to='/temperaments'>Find Dog by temperament</Link> */}
             <Link to='/add'>Add Dog</Link>
         </nav>
     )
