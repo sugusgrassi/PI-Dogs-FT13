@@ -11,6 +11,7 @@ import Footer from './components/Footer/Footer';
 import About from './components/About/About';
 import E404 from './components/E404/E404';
 import Temperaments from './components/Temperaments/Temperaments';
+import Dog from './components/Dog/Dog';
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
       <Route path="/" exact component={Landing} />
       <Route path="/" component={Nav} />
       <Switch>
+        <Route path="/dogs/:id" render={({match}) => <Dog match={match} />} />
         <Route path="/dogs" component={DogContainer} />
         <Route path="/find" component={Find} />
         <Route path="/add" component={AddDog} />

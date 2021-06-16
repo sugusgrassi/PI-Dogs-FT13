@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import Pagination from '../Pagination/Pagination'
 import { connect } from 'react-redux';
-import { getDogs, paginate, stopLoading, setTempDog } from '../../actions/index';
+import { getDogs, paginate, stopLoading, setTempDog, clearDogDetail } from '../../actions/index';
+import { Link } from 'react-router-dom';
+
 
 function DogCards(props) {
-    const {dogs, loading, dogsPerPage, currentPage, stopLoading, selectedTempDogs, zA, azWeight} = props;
+    const {dogs, loading, dogsPerPage, currentPage, stopLoading, selectedTempDogs, zA, azWeight, clearDogDetail} = props;
     // const [currentPage, setCurrentPage] = useState([1]);
 
     // si str = "" trae todos
@@ -12,7 +14,9 @@ function DogCards(props) {
 
     // let str = "23erf";
     // let str = "?name=Terrier";
-
+    useEffect(()=>{
+        clearDogDetail()
+    }, [])
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -92,7 +96,9 @@ function DogCards(props) {
             {currentDogs.map((dog) => (
               <div key={dog.id}>
                   {/* <img src={dog.image} alt={dog.name} /> */}
+                  <Link to={`/dogs/${dog.id}`}>
                   <h2>{dog.name}</h2>
+                  </Link>
                       <div>
                           <span>{dog.temperament} </span>
                           <span>height:{dog.height} </span>
@@ -121,7 +127,7 @@ function mapStateToProps(state) {
 
 export default connect(
     mapStateToProps,
-    {getDogs, paginate, stopLoading, setTempDog}
+    {getDogs, paginate, stopLoading, setTempDog, clearDogDetail}
   )(DogCards);
 
 

@@ -1,9 +1,10 @@
-import { GET_DOGS, PAGINATE_DOGS, STOP_LOADING, GET_TEMP, SET_TEMP_DOG } from "../actions/index";
+import { GET_DOGS, GET_DOG_DETAIL, GET_TEMP, PAGINATE_DOGS, STOP_LOADING, SET_TEMP_DOG, CLEAR_DOG_DETAIL } from "../actions/index";
 
 const initialState = {
     dogs: [],
-    selectedTempDogs: [],
+    dogDetail: {},
     temperaments: [],
+    selectedTempDogs: [],
     loading: true,
     currentPage: 1,
     dogsPerPage: 8
@@ -16,6 +17,18 @@ function rootReducer(state = initialState, action){
             dogs: action.payload,
             loading: false
         }
+    }
+    if (action.type === GET_DOG_DETAIL) {
+        return {
+            ...state,
+            dogDetail: action.payload,
+            loading: false
+        }
+    }
+    if (action.type === CLEAR_DOG_DETAIL) {
+        return {
+            ...state,
+            dogDetail: {}        }
     }
     if (action.type === GET_TEMP) {
         return {
