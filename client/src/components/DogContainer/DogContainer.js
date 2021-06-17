@@ -31,10 +31,11 @@ const DogContainer = () => {
     return (
         <div>
             <Find />
+            <span>A-Z or Weight</span>
             <Switchazw
                 azWeight={azWeight}
                 handleToggleazw={() => handleChangeAZW()}
-            /><span>A-Z or Weight</span>
+            /><span>Order: ↑ ↓</span>
             <Switch
                 isOn={value}
                 handleToggle={() => handleChange()}
