@@ -66,16 +66,28 @@ async function addDog(req, res, next){
             life_span,
             image
         });
-    
-        const createdTemperament = await Temperament.create({
+
+        // async function capitalizeFirstLetter(str) {
+        //     return temperament.charAt(0).toUpperCase() + str.slice(1);
+        //   }
+        //   capitalizeFirstLetter(temperament); 
+
+        // console.log(temperament)
+        let createdTemperament = await Temperament.findOne({
+            where: { temperament: temperament },
+          });
+          console.log(createdTemperament)
+          if (!createdTemperament) createdTemperament = await Temperament.create({
             id,
             temperament
         });
-    
+        
+
         await createdDog.addTemperament(createdTemperament);
         // =
         // await createdTemperament.addDog(createdDog);
-    
+        
+        // Para responder con el perroo creado y su temperamento
         const newDogTemp = {...createdDog, createdTemperament}
       
         // if (!name || !weight || !height || !life_span || !temperament){
@@ -83,6 +95,7 @@ async function addDog(req, res, next){
         // }
     
         res.json(newDogTemp);
+        
     } catch(error) {
         next(error)
     }
