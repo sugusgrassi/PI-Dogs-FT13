@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
 import { getDogs, setTempDog, paginate} from '../../actions/index';
+import './Find.css';
 
 const Find = (props) => {
 
@@ -35,9 +36,9 @@ const Find = (props) => {
       }
 
     return (
-        <div>
-            <h1>Find a breed by name, temperament or word</h1>
-            <form className="" onSubmit={(e) => handleSubmit(e)} onReset={(e) => handleFormReset(e)}>
+        <div >
+            {/* <h1>Find a breed by name, temperament or word</h1> */}
+        <form className="findContainer" onSubmit={(e) => handleSubmit(e)} onReset={(e) => handleFormReset(e)}>
         <div>
           <label className="" htmlFor="breedName">Breed? </label>
           <input
@@ -48,8 +49,8 @@ const Find = (props) => {
             onChange={(e) => handleChange(e)}
           />
         </div>
-        <button type="submit">Find</button>
-        <input
+        {/* <button type="submit">Find</button> */}
+        <input className={"inputbutton"}
             type="reset"
             value="Reset"
           />

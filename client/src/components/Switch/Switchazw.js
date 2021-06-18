@@ -9,13 +9,13 @@ const Switchazw = ({ azWeight, handleToggleazw }) => {
           <input
             checked={azWeight}
             onChange={handleToggleazw}
-            // className="react-switch-checkbox"
+            className="react-switch-checkbox"
             id={`react-switch-new2`}
             type="checkbox"
           />
             <label
-            style={{ background: azWeight && '#06D6A0' }}
-            // className="react-switch-label"
+            // style={{ background: azWeight && '#06D6A0' }}
+            className="react-switch-label"
             htmlFor={`react-switch-new2`}
             >
             <span className={`react-switch-button`} />

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
 import { getTemperaments, getDogs, setTempDog, paginate} from '../../actions/index';
+import './Temperaments.css';
 
 function Temperaments({getTemperaments, temperaments, dogs, getDogs, setTempDog, selectedTempDogs, paginate}) {
 

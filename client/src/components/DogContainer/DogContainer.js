@@ -29,17 +29,30 @@ const DogContainer = () => {
 
 
     return (
-        <div>
-            <Find />
-            <span>A-Z or Weight</span>
-            <Switchazw
-                azWeight={azWeight}
-                handleToggleazw={() => handleChangeAZW()}
-            /><span>Order: ↑ ↓</span>
-            <Switch
-                isOn={value}
-                handleToggle={() => handleChange()}
-            />
+        <div >
+            <h1>Find the dogs!</h1>
+            <div className="flexContainer">
+                <Find />
+                <div className="flexContainer">
+                    <span>Data type: Name </span>
+                    <Switchazw
+                        azWeight={azWeight}
+                        handleToggleazw={() => handleChangeAZW()}
+                    />
+                    <span> Weight</span>
+                </div>
+                <div className="flexContainer">
+                    <span>Order: ↑ </span>
+                    <Switch
+                        isOn={value}
+                        handleToggle={() => handleChange()}
+                    />
+                    <span> ↓</span>
+                </div>
+                <div className="flexContainer">
+                <h2>Find by temperament</h2>
+                </div>
+            </div>
             <Temperaments />
             <DogCards zA = {value} azWeight = {azWeight} />
         </div>

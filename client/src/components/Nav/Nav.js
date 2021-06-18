@@ -1,12 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
+import './Nav.css';
+import rocketDog from "../images/rocket-dog.gif";
 
 const Nav = () => {
     return (
         <nav>
-            <Link to='/dogs'>Henry Dogs</Link>
+            <Link className={"navLinks"} to='/'>
+                <h1>Who let the dogs app</h1>
+                <img className={"rocketDog"} src={rocketDog} alt="rocket dog"/>
+            </Link>
+            <NavLink className={"navLinks"} exact={true} activeClassName='is-active' to='/dogs'>Henry Dogs</NavLink>
             {/* <Link to='/temperaments'>Find Dog by temperament</Link> */}
-            <Link to='/add'>Add Dog</Link>
+            <NavLink className={"navLinks"} exact={true} activeClassName='is-active' to='/add'>Add Dog</NavLink>
         </nav>
     )
 }
