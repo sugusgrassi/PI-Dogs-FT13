@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getDogs } from '../../actions/index';
 import dogvideo from "../video/dogvideo.mp4";
+import logo from "../images/dogsapp-01.png";
+import logo2 from "../images/dogsapp-02.png";
+import './Landing.css';
 
 const Landing = ({getDogs}) => {
 
@@ -25,8 +28,14 @@ const Landing = ({getDogs}) => {
         </video>
 
         <Link to='/dogs'>
-            <button style={{position: "absolute", margin: "0 auto", top: "50%", fontSize: "2rem"}}> Enter
-            </button>
+            <img  src={logo} className="logo"
+                style={{position: "absolute", left: "50%", top: "50%", zIndex: "1", transform: "translate(-50%, -50%)"}}  
+            />
+            <img  src={logo2} className="logo2"
+                style={{position: "absolute", left: "50%", top: "50%", zIndex: "1", transform: "translate(-50%, -50%)"}}  
+            />
+            {/* <button style={{position: "absolute", margin: "0 auto", top: "50%", fontSize: "2rem"}}> Enter
+            </button> */}
         </Link>
         </div>
     )
