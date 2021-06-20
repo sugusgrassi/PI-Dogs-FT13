@@ -3,7 +3,7 @@ import Pagination from '../Pagination/Pagination'
 import { connect } from 'react-redux';
 import { getDogs, paginate, stopLoading, setTempDog, clearDogDetail } from '../../actions/index';
 import { Link } from 'react-router-dom';
-
+import './DogCards.css';
 
 function DogCards(props) {
     const {dogs, loading, dogsPerPage, currentPage, stopLoading, selectedTempDogs, zA, azWeight, clearDogDetail} = props;
@@ -91,24 +91,26 @@ function DogCards(props) {
 
 
     return (
-        <div>
-            {currentDogs.length > 0  ? (<div>
+        <div className="dogCardsContainer">
+            {currentDogs.length > 0  ? (<div className="dogCards">
             {currentDogs.map((dog) => (
-              <div key={dog.id}>
-                  {/* <img src={dog.image} alt={dog.name} /> */}
-                  <Link to={`/dogs/${dog.id}`}>
-                  <h2>{dog.name}</h2>
-                  </Link>
-                      <div>
-                          <span>{dog.temperament} </span>
-                          <span>height:{dog.height} </span>
-                          <span>weight: {dog.weight} </span>
-                          <span>life_span: {dog.life_span} </span>
-                      </div>
+                <div className="dogCard" key={dog.id}>
+                <Link to={`/dogs/${dog.id}`}>
+                <div className="imgContainer"><img className="imgCard" src={dog.image} alt={dog.name} /></div>
+                </Link>
+                <div className="nameTemp">
+                    <Link className="dogLink" to={`/dogs/${dog.id}`}>
+                        <h2 className="dogName">{dog.name}</h2>
+                    </Link>
+                    <p className="tempInfo"><strong>T:</strong> {dog.temperament} </p>
+                    {/* <span>height:{dog.height} </span>
+                    <span>weight: {dog.weight} </span>
+                    <span>life_span: {dog.life_span} </span> */}
+                </div>
               </div>
             ))}
             </div>) : <h3>The network is not working and we couldn't catch any dog, please try later</h3>}
-            {selectedTempDogs ? (<Pagination totalDogs={selectedTempDogs.length} />): <Pagination totalDogs={dogs.length} />} 
+            <div className="pagination" >{selectedTempDogs ? (<Pagination totalDogs={selectedTempDogs.length} />): <Pagination totalDogs={dogs.length} />}</div> 
         </div>
     )
 

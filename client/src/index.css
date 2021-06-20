@@ -29,14 +29,15 @@ font-family: 'Teko', sans-serif; */
 .flexContainer {
   display: flex;
   justify-content: space-around;
-  align-items: flex-end;
+  align-items: center;
   /* border: 1px solid black; */
   text-decoration: none;
-  max-width: 960px;
+  /* max-width: 960px; */
   flex-wrap: wrap;
 }
 
-/* * {
+/* 
+* {
   border: 1px solid grey;
 } */
 

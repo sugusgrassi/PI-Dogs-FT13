@@ -10,6 +10,7 @@ import { getDogs } from '../../actions/index';
 const DogContainer = () => {
     const [value, setValue] = useState(false);
     const [azWeight, setWeight] = useState(false);
+    const [showTemp, setShowTemp] = useState(false);
     
 
     function handleChangeAZW() {
@@ -24,8 +25,13 @@ const DogContainer = () => {
         setValue(!value)
       }
 
-
-
+    const onClick = () => {
+        if (showTemp === false){
+        setShowTemp(true)
+    }   else {
+        setShowTemp(false)
+    }
+    };
 
 
     return (
@@ -50,10 +56,10 @@ const DogContainer = () => {
                     <span> ↓</span>
                 </div>
                 <div className="flexContainer">
-                <h2>Find by temperament</h2>
+                <button onClick={onClick}>{showTemp ? "Hide temperaments" : "Show temperaments"}</button>
                 </div>
             </div>
-            <Temperaments />
+            { showTemp ? <Temperaments/>  : null }
             <DogCards zA = {value} azWeight = {azWeight} />
         </div>
     )

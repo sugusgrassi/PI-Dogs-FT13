@@ -22,13 +22,13 @@ function Dog(props) {
             <li>{props.dogDetail.temperament}</li>
             <li>height:{props.dogDetail.height ? (
                 props.dogDetail.height) : (
-            <span>Cargando...</span>
+            <span>Loading...</span>
             )} </li>
             <li>weight: {props.dogDetail.weight} </li>
             <li>life_span: {props.dogDetail.life_span} </li>
             </ul>
             ) : (
-            <h4>Cargando...</h4>
+            <h4>Loading...</h4>
             )}
         </div>
     )

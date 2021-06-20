@@ -4,7 +4,7 @@ import './Switch.css';
 const Switchazw = ({ azWeight, handleToggleazw }) => {
   return (
     <>
-    <div>
+    <div className="flexContainer">
         
           <input
             checked={azWeight}

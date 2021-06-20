@@ -2,7 +2,7 @@
 import React, { useEffect} from 'react';
 import { connect } from 'react-redux';
 import { paginate } from '../../actions/index';
-
+import './Pagination.css';
 
 // totalDogs viene como prop del componente padre = dogs || query.name
 // dogsPerPage y paginate del store

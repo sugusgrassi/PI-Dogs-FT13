@@ -4,7 +4,7 @@ import './Switch.css';
 const Switch = ({ isOn, handleToggle }) => {
   return (
     <>
-    <div>
+    <div className="flexContainer">
         
           <input
             checked={isOn}

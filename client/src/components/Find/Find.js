@@ -52,7 +52,7 @@ const Find = (props) => {
         {/* <button type="submit">Find</button> */}
         <input className={"inputbutton"}
             type="reset"
-            value="Reset"
+            value="Show all"
           />
       </form>
         </div>

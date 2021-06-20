@@ -6,10 +6,15 @@
     top: "50%";
     z-index: "10";
     transform: "translate(-50%, -50%)";
+    filter: brightness(70%);
+    transition: 0.2s;
 }
 
 .logo:hover {
-    display: none;
+    /* display: none; */
+    filter: brightness(100%);
+    transition: 0.2s;
+
 }
 
 .logo2 {
