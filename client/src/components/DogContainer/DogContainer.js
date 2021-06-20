@@ -73,7 +73,7 @@ const DogContainer = (props) => {
                     <span> ↓</span>
                 </div>
                 <div className="flexContainer">
-                <button onClick={onClick}>{showTemp ? "Hide temperaments" : "Show temperaments"}</button>
+                <button onClick={onClick} className={showTemp ? "activeButton" : "" }>{showTemp ? "Hide temperaments" : "Show temperaments"}</button>
                 </div>
             </div>
             { showTemp ? <Temperaments/>  : null }

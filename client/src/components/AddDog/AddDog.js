@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { POST_DOG_URL } from '../../constants';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
+import "./AddDog.css";
 
 const AddDog = () => {
     const [newDog, setNewDog] = useState({
@@ -17,7 +18,7 @@ const AddDog = () => {
 
     function validateImageDog(value) {
         if(!/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi.test(value)) {
-          setError('It must be an URL');
+          setError('↑ It must be an URL');
         } else {
           setError('');
         }
@@ -35,26 +36,29 @@ const AddDog = () => {
        history.push('/dogs');
     }
 
+    const isEnabled = newDog.name.length > 0 && newDog.weight.length > 0 && newDog.life_span.length > 0 && newDog.temperament.length > 0 && newDog.image.length > 0;
+
     // console.log(newDog.name)
     return (
-        <div>
+        <div >
             <h1>Add dog</h1>
-            <form onSubmit={(e) => handleSubmit(e)}>
-                <input name="dogname" value={newDog.name} placeholder="Dog name" onChange={(e)=> setNewDog(prevState =>
-                    ({...prevState, name: e.target.value}))}/>
-                <input name="weight" value={newDog.weight} placeholder="Dog weight" onChange={(e)=> setNewDog(prevState =>
-                    ({...prevState, weight: e.target.value}))}/>
-                <input name="height" value={newDog.height} placeholder="Dog height" onChange={(e)=> setNewDog(prevState =>
-                    ({...prevState, height: e.target.value}))}/>
-                <input name="life_span" value={newDog.life_span} placeholder="Dog life_span" onChange={(e)=> setNewDog(prevState =>
-                    ({...prevState, life_span: e.target.value}))}/>
-                <input name="temperament" value={newDog.temperament} placeholder="Dog temperament" onChange={(e)=> setNewDog(prevState =>
-                    ({...prevState, temperament: e.target.value}))}/>
-                <input name="image" value={newDog.image} placeholder="Dog image URL" onChange={(e)=> validateImageDog(e.target.value)}/>
-                {!error ? null : <span>{error}</span>}
-                <input type="submit" />
-            </form>
-            <></>
+            <div className="dogCardsContainer">
+                <form className="addDogForm" onSubmit={(e) => handleSubmit(e)}>
+                    <input name="dogname" value={newDog.name} placeholder="Dog name" onChange={(e)=> setNewDog(prevState =>
+                        ({...prevState, name: e.target.value}))}/>
+                    <input name="weight" value={newDog.weight} placeholder="Dog weight" onChange={(e)=> setNewDog(prevState =>
+                        ({...prevState, weight: e.target.value}))}/>
+                    <input name="height" value={newDog.height} placeholder="Dog height" onChange={(e)=> setNewDog(prevState =>
+                        ({...prevState, height: e.target.value}))}/>
+                    <input name="life_span" value={newDog.life_span} placeholder="Dog life_span" onChange={(e)=> setNewDog(prevState =>
+                        ({...prevState, life_span: e.target.value}))}/>
+                    <input name="temperament" value={newDog.temperament} placeholder="Dog temperament" onChange={(e)=> setNewDog(prevState =>
+                        ({...prevState, temperament: e.target.value}))}/>
+                    <input name="image" value={newDog.image} placeholder="Dog image URL" onChange={(e)=> validateImageDog(e.target.value)}/>
+                    {!error ? null : <span className="formError">{error}</span>}
+                    <div className="divSubmit"><input className="inputbutton" type="submit" disabled={!isEnabled || error}/></div>
+                </form>
+            </div>
         </div>
     )
 }

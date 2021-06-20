@@ -1,0 +1,28 @@
+
+
+.addDogForm {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 300px;
+}
+
+.addDogForm > input {
+    display: block;
+}
+
+.submitDog {
+    max-width: 100px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.formError {
+    color: orangered;
+  }
+  
+  .divSubmit{
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 5px;
+  }

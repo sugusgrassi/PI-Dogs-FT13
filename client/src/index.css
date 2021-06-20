@@ -76,3 +76,9 @@ input {
 .activeButton {
   border: 2px solid black;
 }
+
+.dogCardsContainer {
+  margin-top: 32px;
+  padding: 32px 16px;
+  background-color: rgb(240, 240, 240); 
+}

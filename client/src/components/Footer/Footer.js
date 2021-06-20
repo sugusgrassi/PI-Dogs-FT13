@@ -1,16 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
+import './Footer.css';
 
 const Footer = () => {
     return (
-        <div>
-            <div />
-            <div >
-                <span className="">Made with ♡ by <a href="https://sugusgrassi.github.io/cv_soyhenry/" target="blank" className="">@sugusgrassi</a></span>
-                <Link to="/about">
-                <span className="">About</span>
-                </Link>
-            </div>
+        <div className="footer">
+            <span className="footertext">Made with ♡ by <a href="https://sugusgrassi.netlify.app/" target="blank" className="footerlinks">@sugusgrassi</a></span>
+            <NavLink className="footerlinks" activeClassName='is-active' to="/about">
+            <span>About</span>
+            </NavLink>
         </div>
     )
 }
