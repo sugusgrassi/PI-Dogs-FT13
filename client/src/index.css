@@ -42,15 +42,27 @@ font-family: 'Teko', sans-serif; */
 } */
 
 .inputbutton {
+  position: relative;
   font-family: 'Space Mono', monospace; 
   font-weight: 900;
   background-color: white;
   border: 2px solid black;
   margin: 2px;
+  box-shadow: 2px 2px black;
+  left: -2px;
+  top: -2px;
 }
 
 .inputbutton:hover {
   background-color: rgb(255, 254, 191);
+}
+
+.inputbutton:active {
+  background-color: red;
+  left: 0px;
+  top: 0px;
+  box-shadow: none;
+  color: white;
 }
 
 input {
@@ -59,4 +71,8 @@ input {
   background-color: white;
   border: 2px solid black;
   margin: 2px;
+}
+
+.activeButton {
+  border: 2px solid black;
 }

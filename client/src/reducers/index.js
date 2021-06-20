@@ -1,13 +1,16 @@
-import { GET_DOGS, GET_DOG_DETAIL, GET_TEMP, PAGINATE_DOGS, STOP_LOADING, SET_TEMP_DOG, CLEAR_DOG_DETAIL } from "../actions/index";
+import { GET_DOGS, GET_DOG_DETAIL, GET_TEMP, PAGINATE_DOGS, STOP_LOADING, SET_TEMP_DOG, CLEAR_DOG_DETAIL, API_DOGS, DB_DOGS } from "../actions/index";
 
 const initialState = {
     dogs: [],
+    apiDB: [],
+    apiDogsArr: [],
+    dbDogsArr: [],
     dogDetail: {},
     temperaments: [],
     selectedTempDogs: [],
     loading: true,
     currentPage: 1,
-    dogsPerPage: 8
+    dogsPerPage: 9
 }
 
 function rootReducer(state = initialState, action){
@@ -15,6 +18,9 @@ function rootReducer(state = initialState, action){
         return {
             ...state,
             dogs: action.payload,
+            apiDB: state.dogs,
+            apiDogsArr: state.dogs.filter(dog => typeof dog.id === "number"),
+            dbDogsArr: state.dogs.filter(dog => typeof dog.id === "string"),
             loading: false
         }
     }
@@ -52,6 +58,22 @@ function rootReducer(state = initialState, action){
         return {
             ...state,
             selectedTempDogs: action.payload
+        }
+    }
+    if (action.type === API_DOGS) {
+        console.log("llama apidogs")
+        console.log(state.dogs.filter(dog => dog.id < 300))
+        return {
+            ...state,
+            dogs: state.apiDogsArr
+        }
+    }
+    if (action.type === DB_DOGS) {
+        console.log("llama dbdogs")
+        console.log(state.dogs.filter(dog => dog.id.length > 1))
+        return {
+            ...state,
+            dogs: state.dbDogsArr
         }
     }
     

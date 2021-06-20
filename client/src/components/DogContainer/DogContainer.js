@@ -5,9 +5,9 @@ import Switch from '../Switch/Switch';
 import Switchazw from '../Switch/Switchazw';
 import Temperaments from '../Temperaments/Temperaments';
 import { connect } from 'react-redux';
-import { getDogs } from '../../actions/index';
+import { getDogs, apiDogs, dbDogs, getTemperaments } from '../../actions/index';
 
-const DogContainer = () => {
+const DogContainer = (props) => {
     const [value, setValue] = useState(false);
     const [azWeight, setWeight] = useState(false);
     const [showTemp, setShowTemp] = useState(false);
@@ -33,12 +33,29 @@ const DogContainer = () => {
     }
     };
 
+    const apiClick = () => {
+        
+        props.apiDogs();
+        console.log(apiDogs);
+    };
+
+    const dbClick = () => {
+  
+       props.dbDogs();
+        console.log(apiDogs);
+    };
+    
+    useEffect(()=>{
+        props.getDogs("");
+    }, [])
 
     return (
         <div >
             <h1>Find the dogs!</h1>
             <div className="flexContainer">
                 <Find />
+                <button onClick={() => apiClick()} className={props.dogs.length === props.apiDogsArr.length ? "activeButton" : ""}>Api</button>
+                <button onClick={dbClick} className={props.dogs.length === props.dbDogsArr.length ? "activeButton" : ""}>DB</button>
                 <div className="flexContainer">
                     <span>Data type: Name </span>
                     <Switchazw
@@ -65,7 +82,17 @@ const DogContainer = () => {
     )
 }
 
+function mapStateToProps(state) {
+    return {
+        apiDogsArr: state.apiDogsArr,
+        dbDogsArr: state.dbDogsArr,
+        dogs: state.dogs
+    };
+  }
+
+
+
 export default connect(
-    null,
-    {getDogs }
+    mapStateToProps,
+    {getDogs, apiDogs, dbDogs, getTemperaments }
   )(DogContainer);

@@ -109,7 +109,7 @@ function DogCards(props) {
                 </div>
               </div>
             ))}
-            </div>) : <h3>The network is not working and we couldn't catch any dog, please try later</h3>}
+            </div>) : <h3>We couldn't catch any dog, please press Show all or try later</h3>}
             <div className="pagination" >{selectedTempDogs ? (<Pagination totalDogs={selectedTempDogs.length} />): <Pagination totalDogs={dogs.length} />}</div> 
         </div>
     )

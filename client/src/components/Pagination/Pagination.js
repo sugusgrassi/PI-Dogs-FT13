@@ -6,7 +6,7 @@ import './Pagination.css';
 
 // totalDogs viene como prop del componente padre = dogs || query.name
 // dogsPerPage y paginate del store
-const Pagination = ({totalDogs,dogsPerPage, paginate}) => {
+const Pagination = ({totalDogs,dogsPerPage, paginate, currentPage}) => {
     const pageNumbers =[];
 
     for (let i = 1; i <= Math.ceil(totalDogs / dogsPerPage); i++) {
@@ -18,12 +18,17 @@ const Pagination = ({totalDogs,dogsPerPage, paginate}) => {
         paginate(1)
         }, []);
 
+        console.log(currentPage)
+    
     return (
         <nav>
             <ul>
                {pageNumbers.map(number => (
                    <li key={number} style={{display: "inline", margin: "0 5px"}}>
-                       <button onClick={() => paginate(number)} href='!#'>
+                       <button 
+                       onClick={() => paginate(number)} href='!#'
+                       className={currentPage === number ? "activeButton" : ""}
+                       >
                            {number} 
                        </button>
                    </li>
@@ -39,6 +44,7 @@ const Pagination = ({totalDogs,dogsPerPage, paginate}) => {
 function mapStateToProps(state) {
     return {
         dogsPerPage: state.dogsPerPage,
+        currentPage: state.currentPage
 };
   }
 

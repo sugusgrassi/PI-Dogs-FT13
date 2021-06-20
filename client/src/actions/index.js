@@ -10,6 +10,9 @@ export const PAGINATE_DOGS = "PAGINATE_DOGS";
 export const STOP_LOADING = "STOP_LOADING";
 export const SET_TEMP_DOG = "SET_TEMP_DOG";
 
+export const API_DOGS = "API_DOGS";
+export const DB_DOGS = "DB_DOGS";
+
 export function getDogs(str){
     return function(dispatch) {
     return axios.get(BASE_URL + str)
@@ -61,6 +64,16 @@ export function stopLoading(payload) {
 export function setTempDog(payload) {
     return { type: SET_TEMP_DOG, payload };
 }
+
+export function apiDogs() {
+    return { type: API_DOGS };
+}
+
+export function dbDogs() {
+    return { type: DB_DOGS };
+}
+
+
 
 // Con fetch
 // export function getDogs(){
