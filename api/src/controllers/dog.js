@@ -56,33 +56,38 @@ Temperamentos
 
 async function addDog(req, res, next){
     const  {name, weight, height, life_span, temperament, image } = req.body;
-    const id = uuidv4();
+    
+    const ide = uuidv4();
+    
     try {
         const createdDog = await Dog.create({
-            id,
+            id: ide,
             name,
             weight,
             height,
             life_span,
             image
         });
-
+       
+        
         // async function capitalizeFirstLetter(str) {
         //     return temperament.charAt(0).toUpperCase() + str.slice(1);
         //   }
         //   capitalizeFirstLetter(temperament); 
 
         // console.log(temperament)
+        for await (const temp of temperament)  {
+            const ide2 = uuidv4();
         let createdTemperament = await Temperament.findOne({
-            where: { temperament: temperament },
+            where: { temperament: temp },
           });
-          console.log(createdTemperament)
+        //   console.log(createdTemperament)
           if (!createdTemperament) createdTemperament = await Temperament.create({
-            id,
-            temperament
+            id: ide2,
+            temperament: temp
         });
-        
-
+        console.log(createdTemperament)
+ 
         await createdDog.addTemperament(createdTemperament);
         // =
         // await createdTemperament.addDog(createdDog);
@@ -94,8 +99,8 @@ async function addDog(req, res, next){
         //   return res.render('error', {message: "Mensaje de error"});
         // }
     
-        res.json(newDogTemp);
-        
+        res.send("dog created");
+    }
     } catch(error) {
         next(error)
     }
