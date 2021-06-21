@@ -4,7 +4,7 @@ export default function E404() {
     return (
       <div>
           <h2>Error 404</h2>
-          <p >Sorry, we los all the dogs. Please keep searching!!</p>
+          <p >Sorry, we lost all the dogs. Please keep searching!!</p>
         </div>
     );
   };
