@@ -1,4 +1,4 @@
-import { GET_DOGS, GET_DOG_DETAIL, GET_TEMP, PAGINATE_DOGS, STOP_LOADING, SET_TEMP_DOG, CLEAR_DOG_DETAIL, API_DOGS, DB_DOGS } from "../actions/index";
+import { GET_DOGS, GET_DOG_DETAIL, GET_TEMP, PAGINATE_DOGS, STOP_LOADING, SET_TEMP_DOG, CLEAR_DOG_DETAIL, API_DOGS, DB_DOGS, SET_DOG_API_DB } from "../actions/index";
 
 const initialState = {
     dogs: [],
@@ -74,6 +74,13 @@ function rootReducer(state = initialState, action){
         return {
             ...state,
             dogs: state.dbDogsArr
+        }
+    }
+    if (action.type === SET_DOG_API_DB) {
+        console.log("llama apiDB")
+        return {
+            ...state,
+            dogs: state.apiDB
         }
     }
     

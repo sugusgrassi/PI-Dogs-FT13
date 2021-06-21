@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
-import { getDogs, setTempDog, paginate} from '../../actions/index';
+import { getDogs, setTempDog, paginate, setdogApiDB} from '../../actions/index';
 import './Find.css';
 
 const Find = (props) => {
@@ -11,6 +11,7 @@ const Find = (props) => {
         setBreedName(event.target.value);
       }
       
+      // Solo se usará el reset "Show all" | Usé useEffect para que cambie el estado de breedName a medida que un usuario escribe
       function handleSubmit(event) {
         event.preventDefault();
         props.paginate(1)
@@ -30,7 +31,9 @@ const Find = (props) => {
         event.preventDefault();
         props.setTempDog("")
         setBreedName("")
-        props.getDogs("")
+        // props.getDogs("")
+        // Para que no llame una y otra vez a la api y sea más rápido
+        props.setdogApiDB()
         props.paginate(1)
 
       }
@@ -62,5 +65,5 @@ const Find = (props) => {
 
 export default connect(
     null,
-    {getDogs, setTempDog, paginate}
+    {getDogs, setTempDog, paginate, setdogApiDB}
   )(Find);

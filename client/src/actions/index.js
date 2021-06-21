@@ -12,6 +12,8 @@ export const SET_TEMP_DOG = "SET_TEMP_DOG";
 
 export const API_DOGS = "API_DOGS";
 export const DB_DOGS = "DB_DOGS";
+export const SET_DOG_API_DB = "SET_DOG_API_DB";
+
 
 export function getDogs(str){
     return function(dispatch) {
@@ -71,6 +73,10 @@ export function apiDogs() {
 
 export function dbDogs() {
     return { type: DB_DOGS };
+}
+
+export function setdogApiDB() {
+    return { type: SET_DOG_API_DB };
 }
 
 

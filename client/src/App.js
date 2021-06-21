@@ -7,6 +7,7 @@ import DogContainer from './components/DogContainer/DogContainer';
 import Nav from './components/Nav/Nav';
 import Find from './components/Find/Find';
 import AddDog from './components/AddDog/AddDog';
+import AddDogThanks from './components/AddDog/AddDogThanks';
 import Footer from './components/Footer/Footer';
 import About from './components/About/About';
 import E404 from './components/E404/E404';
@@ -50,6 +51,7 @@ function App() {
         <Route path="/dogs" component={DogContainer} />
         <Route path="/find" component={Find} />
         <Route path="/add" component={AddDog} />
+        <Route path="/thanks" component={AddDogThanks} />
         <Route path="/about" component={About} />
         {/* <Route path="/temperaments" component={Temperaments} /> */}
         <Route path="*" component={E404} status={404}/>

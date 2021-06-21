@@ -5,23 +5,28 @@ import Switch from '../Switch/Switch';
 import Switchazw from '../Switch/Switchazw';
 import Temperaments from '../Temperaments/Temperaments';
 import { connect } from 'react-redux';
-import { getDogs, apiDogs, dbDogs, getTemperaments } from '../../actions/index';
+import { getDogs, apiDogs, dbDogs, getTemperaments, setdogApiDB } from '../../actions/index';
 
 const DogContainer = (props) => {
     const [value, setValue] = useState(false);
     const [azWeight, setWeight] = useState(false);
     const [showTemp, setShowTemp] = useState(false);
     
+    useEffect(()=>{
+        props.getDogs("");
+    }, [])
 
     function handleChangeAZW() {
         // console.log("modificó el value")
         // props.getDogs("")
+        setdogApiDB();
         setWeight(!azWeight)
         }
 
     function handleChange() {
         // console.log("modificó el value")
         // props.getDogs("")
+        setdogApiDB();
         setValue(!value)
       }
 
@@ -45,9 +50,7 @@ const DogContainer = (props) => {
         console.log(apiDogs);
     };
     
-    useEffect(()=>{
-        props.getDogs("");
-    }, [])
+
 
     return (
         <div >
@@ -94,5 +97,5 @@ function mapStateToProps(state) {
 
 export default connect(
     mapStateToProps,
-    {getDogs, apiDogs, dbDogs, getTemperaments }
+    {getDogs, apiDogs, dbDogs, getTemperaments, setdogApiDB }
   )(DogContainer);

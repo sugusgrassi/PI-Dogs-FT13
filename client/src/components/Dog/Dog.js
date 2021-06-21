@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getDogDetail } from '../../actions/index';
+import './Dog.css';
 
 function Dog(props) {
     console.log(props.match.params.id)
@@ -13,20 +14,24 @@ function Dog(props) {
 
     return (
         <div>
-            Dog detail
+            <h1>Dog detail</h1>
             {/* si el props esta definido como undefined agregar un cargando */}
             {props.dogDetail.name ? (
-            <ul>
-            <img src={props.dogDetail.image} alt={props.dogDetail.name} />
-            <li>{props.dogDetail.name}</li>
-            <li>{props.dogDetail.temperament}</li>
-            <li>height:{props.dogDetail.height ? (
-                props.dogDetail.height) : (
-            <span>Loading...</span>
-            )} </li>
-            <li>weight: {props.dogDetail.weight} </li>
-            <li>life_span: {props.dogDetail.life_span} </li>
-            </ul>
+            <div className="dogDetailContainer">
+            <img className="dogImage" src={props.dogDetail.image} alt={props.dogDetail.name} />
+            <div className="dogInfoContainer">
+                <h2 className="dogName" >{props.dogDetail.name}</h2>
+                <ul className="dogList">
+                    <li><strong>Height:</strong> {props.dogDetail.height ? (
+                        props.dogDetail.height) : (
+                    <span>Loading...</span>
+                    )} cm.</li>
+                    <li><strong>Weight:</strong> {props.dogDetail.weight} kg.</li>
+                    <li><strong>Life span:</strong> {props.dogDetail.life_span}.</li>
+                    <li><strong>Temperament:</strong> {props.dogDetail.temperament}.</li>
+                </ul>
+            </div>
+            </div>
             ) : (
             <h4>Loading...</h4>
             )}

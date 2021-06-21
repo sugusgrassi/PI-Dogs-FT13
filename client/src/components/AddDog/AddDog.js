@@ -3,14 +3,16 @@ import { POST_DOG_URL } from '../../constants';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import "./AddDog.css";
+import { connect } from 'react-redux';
+import { getDogs } from '../../actions/index';
 
-const AddDog = () => {
+const AddDog = ({getDogs}) => {
     const [newDog, setNewDog] = useState({
         name: "",
         weight: "",
         height: "",
         life_span: "",
-        temperament: "",
+        temperament: [],
         image: ""
     })
     const [error, setError] = useState("");
@@ -33,7 +35,8 @@ const AddDog = () => {
           .then(function (response) {
             console.log(response);
           })
-       history.push('/dogs');
+          getDogs("")
+       history.push('/thanks');
     }
 
     const isEnabled = newDog.name.length > 0 && newDog.weight.length > 0 && newDog.life_span.length > 0 && newDog.temperament.length > 0 && newDog.image.length > 0;
@@ -53,7 +56,7 @@ const AddDog = () => {
                     <input name="life_span" value={newDog.life_span} placeholder="Dog life_span" onChange={(e)=> setNewDog(prevState =>
                         ({...prevState, life_span: e.target.value}))}/>
                     <input name="temperament" value={newDog.temperament} placeholder="Dog temperament" onChange={(e)=> setNewDog(prevState =>
-                        ({...prevState, temperament: e.target.value}))}/>
+                        ({...prevState, temperament: [e.target.value]}))}/>
                     <input name="image" value={newDog.image} placeholder="Dog image URL" onChange={(e)=> validateImageDog(e.target.value)}/>
                     {!error ? null : <span className="formError">{error}</span>}
                     <div className="divSubmit"><input className="inputbutton" type="submit" disabled={!isEnabled || error}/></div>
@@ -63,7 +66,12 @@ const AddDog = () => {
     )
 }
 
-export default AddDog;
+export default connect(
+    null,
+    {getDogs }
+  )(AddDog);
+
+// export default AddDog;
 // export default withRouter(AddDog);
 
 

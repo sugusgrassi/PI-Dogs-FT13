@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
-import { getTemperaments, getDogs, setTempDog, paginate} from '../../actions/index';
+import { getTemperaments, getDogs, setTempDog, paginate, setdogApiDB} from '../../actions/index';
 import './Temperaments.css';
 
-function Temperaments({getTemperaments, temperaments, dogs, getDogs, setTempDog, selectedTempDogs, paginate}) {
+function Temperaments({getTemperaments, temperaments, dogs, getDogs, setTempDog, selectedTempDogs, paginate, setdogApiDB}) {
 
     useEffect(() => {
         getTemperaments()
-        getDogs("")
+        // getDogs("")
+        setdogApiDB()
       },[])
  
   
       
     function compareDogsTemp(e){
-
+      setdogApiDB();
       let arrTempDogs = []
       for (var dog of dogs) {
           if (dog.temperament?.includes(e.target.value)){
@@ -67,5 +68,5 @@ function mapStateToProps(state) {
 
 export default connect(
     mapStateToProps,
-    {getTemperaments, getDogs, setTempDog, paginate}
+    {getTemperaments, getDogs, setTempDog, paginate, setdogApiDB}
   )(Temperaments);
