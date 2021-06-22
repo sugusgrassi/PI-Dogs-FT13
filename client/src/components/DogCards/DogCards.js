@@ -18,12 +18,12 @@ function DogCards(props) {
         clearDogDetail()
     }, [])
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            stopLoading();
-        }, 4000);
-        return () => clearTimeout(timer);
-      }, []);
+    // useEffect(() => {
+    //     const timer = setTimeout(() => {
+    //         stopLoading();
+    //     }, 4000);
+    //     return () => clearTimeout(timer);
+    //   }, []);
 
 
     // function compareAZ( b, a ) {

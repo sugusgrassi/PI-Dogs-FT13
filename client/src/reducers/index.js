@@ -71,6 +71,7 @@ function rootReducer(state = initialState, action){
         console.log(state.dogs.filter(dog => dog.id < 300))
         return {
             ...state,
+            dogs: state.apiDB,
             dogs: state.apiDogsArr
         }
     }
@@ -79,6 +80,7 @@ function rootReducer(state = initialState, action){
         console.log(state.dogs.filter(dog => dog.id.length > 1))
         return {
             ...state,
+            dogs: state.apiDB,
             dogs: state.dbDogsArr
         }
     }
