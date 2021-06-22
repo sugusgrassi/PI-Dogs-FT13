@@ -2,6 +2,7 @@ import axios from 'axios';
 import {BASE_URL, TEMP_URL} from '../constants.js';
 
 export const GET_DOGS = "GET_DOGS";
+export const GET_DOGS_BY_NAME = "GET_DOGS_BY_NAME";
 export const GET_DOG_DETAIL = "GET_DOG_DETAIL";
 export const CLEAR_DOG_DETAIL = "CLEAR_DOG_DETAIL";
 export const GET_TEMP = "GET_TEMP";
@@ -21,6 +22,18 @@ export function getDogs(str){
     .then((response) => {
         dispatch({ 
             type: GET_DOGS,
+            payload: response.data
+        })
+    }).catch(error => console.log(error))
+    }
+}
+
+export function getDogsByName(str){
+    return function(dispatch) {
+    return axios.get(BASE_URL + str)
+    .then((response) => {
+        dispatch({ 
+            type: GET_DOGS_BY_NAME,
             payload: response.data
         })
     }).catch(error => console.log(error))

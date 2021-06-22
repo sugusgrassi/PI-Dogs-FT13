@@ -77,6 +77,10 @@ input {
   border: 2px solid black;
 }
 
+.apidbButton:active {
+  border: 2px solid black;
+}
+
 .dogCardsContainer {
   margin-top: 32px;
   padding: 32px 16px;

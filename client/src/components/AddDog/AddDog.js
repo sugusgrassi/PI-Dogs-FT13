@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { POST_DOG_URL } from '../../constants';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import "./AddDog.css";
 import { connect } from 'react-redux';
-import { getDogs } from '../../actions/index';
+import { getDogs, getTemperaments } from '../../actions/index';
 
-const AddDog = ({getDogs}) => {
+const AddDog = ({getDogs, getTemperaments}) => {
     const [newDog, setNewDog] = useState({
         name: "",
         weight: "",
@@ -17,6 +17,14 @@ const AddDog = ({getDogs}) => {
     })
     const [error, setError] = useState("");
     let history = useHistory();
+
+
+    useEffect(() => {
+        getTemperaments()
+        // getDogs("")
+        // setdogApiDB()
+      },[getTemperaments])
+
 
     function validateImageDog(value) {
         if(!/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi.test(value)) {
@@ -68,7 +76,7 @@ const AddDog = ({getDogs}) => {
 
 export default connect(
     null,
-    {getDogs }
+    {getDogs, getTemperaments }
   )(AddDog);
 
 // export default AddDog;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
-import { getDogs, setTempDog, paginate, setdogApiDB} from '../../actions/index';
+import { getDogs, setTempDog, paginate, setdogApiDB, getDogsByName} from '../../actions/index';
 import './Find.css';
 
 const Find = (props) => {
@@ -15,15 +15,15 @@ const Find = (props) => {
       function handleSubmit(event) {
         event.preventDefault();
         props.paginate(1)
-        props.setTempDog("")
+        // props.setTempDog("")
         props.getDogs("?name="+breedName)
       }
 
       useEffect(() => {
         console.log("componentDidUpdate: se modificó el state")
         props.paginate(1)
-        props.setTempDog("")
-        props.getDogs("?name="+breedName)
+        // props.setTempDog("")
+        props.getDogsByName("?name="+breedName)
         props.setdogApiDB()
       },[breedName])
 
@@ -31,7 +31,7 @@ const Find = (props) => {
         event.preventDefault();
         props.setTempDog("")
         setBreedName("")
-        props.getDogs("")
+        // props.getDogs("")
         // Para que no llame una y otra vez a la api y sea más rápido
         props.setdogApiDB()
         props.paginate(1)
@@ -43,11 +43,12 @@ const Find = (props) => {
             {/* <h1>Find a breed by name, temperament or word</h1> */}
         <form className="findContainer" onSubmit={(e) => handleSubmit(e)} onReset={(e) => handleFormReset(e)}>
         <div>
-          <label className="" htmlFor="breedName">Breed? </label>
+          {/* <label className="" htmlFor="breedName" >Breed? </label> */}
           <input
             type="text"
             id="breedName"
             autoComplete="off"
+            placeholder="Breed?"
             value={breedName}
             onChange={(e) => handleChange(e)}
           />
@@ -65,5 +66,5 @@ const Find = (props) => {
 
 export default connect(
     null,
-    {getDogs, setTempDog, paginate, setdogApiDB}
+    {getDogs, setTempDog, paginate, setdogApiDB, getDogsByName}
   )(Find);

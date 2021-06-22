@@ -19,14 +19,14 @@ const DogContainer = (props) => {
     function handleChangeAZW() {
         // console.log("modificó el value")
         // props.getDogs("")
-        setdogApiDB();
+        // props.setdogApiDB();
         setWeight(!azWeight)
         }
 
     function handleChange() {
         // console.log("modificó el value")
         // props.getDogs("")
-        setdogApiDB();
+        // props.setdogApiDB();
         setValue(!value)
       }
 
@@ -58,7 +58,7 @@ const DogContainer = (props) => {
             <div className="flexContainer">
                 <Find />
                 <button onClick={() => apiClick()} className={props.dogs.length === props.apiDogsArr.length ? "activeButton" : ""}>Api</button>
-                <button onClick={dbClick} className={props.dogs.length === props.dbDogsArr.length ? "activeButton" : ""}>DB</button>
+                <button onClick={dbClick} className="apidbButton">DB</button>
                 <div className="flexContainer">
                     <span>Data type: Name </span>
                     <Switchazw

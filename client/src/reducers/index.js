@@ -1,4 +1,4 @@
-import { GET_DOGS, GET_DOG_DETAIL, GET_TEMP, PAGINATE_DOGS, STOP_LOADING, SET_TEMP_DOG, CLEAR_DOG_DETAIL, API_DOGS, DB_DOGS, SET_DOG_API_DB } from "../actions/index";
+import { GET_DOGS, GET_DOG_DETAIL, GET_TEMP, PAGINATE_DOGS, STOP_LOADING, SET_TEMP_DOG, CLEAR_DOG_DETAIL, API_DOGS, DB_DOGS, SET_DOG_API_DB, GET_DOGS_BY_NAME } from "../actions/index";
 
 const initialState = {
     dogs: [],
@@ -18,10 +18,16 @@ function rootReducer(state = initialState, action){
         return {
             ...state,
             dogs: action.payload,
-            apiDB: state.dogs,
+            apiDB: action.payload,
             apiDogsArr: state.dogs.filter(dog => typeof dog.id === "number"),
             dbDogsArr: state.dogs.filter(dog => typeof dog.id === "string"),
             loading: false
+        }
+    }
+    if (action.type === GET_DOGS_BY_NAME) {
+        return {
+            ...state,
+            dogs: action.payload,
         }
     }
     if (action.type === GET_DOG_DETAIL) {
