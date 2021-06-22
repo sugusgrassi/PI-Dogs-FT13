@@ -35,7 +35,7 @@ const AddDog = ({getDogs}) => {
           .then(function (response) {
             console.log(response);
           })
-          getDogs("")
+        //   getDogs("")
        history.push('/thanks');
     }
 

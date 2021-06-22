@@ -12,7 +12,7 @@ const DogContainer = (props) => {
     const [azWeight, setWeight] = useState(false);
     const [showTemp, setShowTemp] = useState(false);
     
-    useEffect(()=>{
+        useEffect(()=>{
         props.getDogs("");
     }, [])
 

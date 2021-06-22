@@ -24,14 +24,14 @@ const Find = (props) => {
         props.paginate(1)
         props.setTempDog("")
         props.getDogs("?name="+breedName)
-      
+        props.setdogApiDB()
       },[breedName])
 
       function handleFormReset(event) {
         event.preventDefault();
         props.setTempDog("")
         setBreedName("")
-        // props.getDogs("")
+        props.getDogs("")
         // Para que no llame una y otra vez a la api y sea más rápido
         props.setdogApiDB()
         props.paginate(1)
