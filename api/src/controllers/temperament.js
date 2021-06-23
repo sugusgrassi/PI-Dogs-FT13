@@ -16,7 +16,6 @@ const apiKey = process.env.API_KEY;
             const dogFromApi = axios.get(`${BASE_URL}?api_key=${apiKey}`)    
             const dogFromDB = Dog.findAll(); 
         
-        
              
             Promise.all([dogFromApi, dogFromDB])
             .then((response) => {
@@ -34,7 +33,7 @@ const apiKey = process.env.API_KEY;
                 let joinTempArray = tempArray.join(', ').split(', ');
                 let uniqueTemp = [...new Set(joinTempArray)]
                 var tempArr = [];
-                // const id = uuidv4(); // NO!
+                
                 
                 uniqueTemp.forEach(item => 
                     {
@@ -46,7 +45,7 @@ const apiKey = process.env.API_KEY;
                     })
                     }
                 )
-        
+                // bulkCreate: Create and insert multiple instances in bulk
                 Temperament.bulkCreate(tempArr).then(() => { 
                     return Temperament.findAll();
                   }).then(result => {
@@ -58,16 +57,11 @@ const apiKey = process.env.API_KEY;
             .catch((error) => next(error));
         }
     })
-    
-
-    
-
 
 }
 
 
-
-
+ 
 module.exports = {
     getTemperament
 }

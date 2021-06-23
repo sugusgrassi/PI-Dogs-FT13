@@ -4,7 +4,7 @@ const { BASE_URL, DOG_URL } = require('../../constants');
 const { v4: uuidv4 } = require('uuid');
 
 const apiKey = process.env.API_KEY;
-
+ 
 function getAllDogs(req, res, next){
     const dogFromApi = axios.get(`${BASE_URL}?api_key=${apiKey}`)    
     const dogFromDB = Dog.findAll({include: Temperament}); // findAll es una promesa de la búsqueda de datos en models/Dog.js que pasa por db para llegar hasta acá {limit: 4}
@@ -15,19 +15,6 @@ function getAllDogs(req, res, next){
     .then((response) => {
         let [dogFromApiResponse, dogFromDBResponse] = response;
         let whoLetTheDogsOut = dogFromDBResponse.concat(dogFromApiResponse.data);
-
-        // // Orden x nombre A-Z || Está hecho en el front
-        // function compare( a, b ) {
-        //     if ( a.name < b.name ){
-        //         return -1;
-        //     }
-        //     if ( a.name > b.name ){
-        //         return 1;
-        //     }
-        //     return 0;
-        //     }
-            
-        //     whoLetTheDogsOut.sort(compare)
    
         if (req.query.name) {
 
@@ -37,6 +24,7 @@ function getAllDogs(req, res, next){
             if (filteredDogs.length > 0) {
                 // let firstEight = filteredDogs.splice(0, 8);
                  
+                // Paginado desde la API
                 if (!req.query.page) {
                     // let firstEight = filteredDogs.slice(0, 8);
                     let firstEight = filteredDogs;
@@ -63,7 +51,7 @@ function getAllDogs(req, res, next){
         }
 
         if (!req.query.page) {
-            // let firstEight = whoLetTheDogsOut.slice(0, 8);
+            
             // Pagination in the front
             let firstEight = whoLetTheDogsOut;
             simplifiedDog(firstEight);
@@ -136,28 +124,16 @@ async function dogById(req, res, next){
     }
 }
 
-async function addDog(req, res, next){
-    const id = uuidv4();
-    const newDog = {...req.body, id}
 
-    try {
-        const createdDog = await Dog.create(newDog)
-        return res.json(createdDog)
-    } catch(error) {
-        next(error);
-    }
-}
 
 module.exports = {
     getAllDogs,
-    dogById,
-    addDog
+    dogById
 }
 
 function simplifiedDog(dogs){
     for (var dog of dogs){
         if (typeof dog.id === "number") {
-            // desectructuring and then save it in a new variable
             delete dog.origin;
             delete dog.breed_group;
             delete dog.reference_image_id;
@@ -177,72 +153,3 @@ function simplifiedDog(dogs){
         }
     }
 }
-
-// llamado solo a la api
-// function getAllDogs(req, res, next){
-//     const dogFromApi = axios.get(`https://api.thedogapi.com/v1/breeds?api_key=39196b86-fa48-4a39-a0f5-4d629a8311b0`)    
-//     let dogPromise = new Promise(function(myResolve, myReject) {
-//         // "Producing Code" (May take some time)
-//           myResolve(dogFromApi); // when successful
-//           myReject();  // when error
-//         });
-//     dogPromise
-//     .then((response) => {
-//         res.send(response.data)
-//         console.log(response.data)
-//     })
-//     .catch((error) => next(error));
-// }
-
-
-// {include: Temperament} trae demasiado!! si id no está cuelga
-// function dogById(req, res, next){
-//     const dogFromApi = axios.get(`${BASE_URL}?api_key=${apiKey}`)    
-//     const dogFromDB = Dog.findAll({include: Temperament}); 
-    
-
-//     Promise.all([dogFromApi, dogFromDB])
-//     .then((response) => {
-//         let [dogFromApiResponse, dogFromDBResponse] = response;
-//         const dogApiDB = dogFromDBResponse.concat(dogFromApiResponse.data)
-//         console.log(req.params.id)
-//         for (var dog of dogApiDB) {
-        
-//                 if (dog.id == req.params.id){
-//                     res.json(dog)
-                
-//             }
-//         }
-//         return res.status(500)
-        
-//     })
-//     .catch((error) => next(error));
-    
-// }
-
-
-
-// Destructuring y salvarlo en una nueva variable. no conviene queda una var global
-// var dogArr = [] // 
-// function simplifiedDog(firstEight){
-
-//     for (var dog of firstEight){
-//         if (typeof dog.id === "number") {
-//             
-//             dog.image = dog.image.url;
-//             dog.weight = dog.weight.metric;
-//             dog.height = dog.height.metric;
-//             var {id, name, height, weight, life_span, temperament, image} = dog;
-//             doggy = {
-//                 id, name, height, weight, life_span, temperament, image
-//             }
-//             dogArr.push(doggy)
-//         }
-//         else {
-//             delete dog.dataValues.createdAt;
-//             delete dog.dataValues.updatedAt;
-//             dog.dataValues.temperament = dog.dataValues.temperaments[0].temperament;
-//             delete dog.dataValues.temperaments;
-//         }
-//     }
-// }

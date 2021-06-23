@@ -1,8 +1,5 @@
 const { Dog, Temperament } = require('../db');
-// const axios = require('axios');
-// const { BASE_URL, DOG_URL } = require('../../constants');
 const { v4: uuidv4 } = require('uuid');
-
 
 /*
 Ruta de creación de raza de perro: debe contener
@@ -31,20 +28,6 @@ Temperamentos
 }
 */
 
-
-// async function addDog(req, res, next){
-//     console.log("hola")
-//     const id = uuidv4();
-//     const newDog = {...req.body, id}
-//     console.log(newDog)
-//     try {
-//         const createdDog = await Dog.create(newDog)
-//         return res.send(createdDog)
-//     } catch(error) {
-//         next(error);
-//     }
-// }
-
 // Para Postman
 // {
 //     "name": "siames",
@@ -70,18 +53,13 @@ async function addDog(req, res, next){
         });
        
         
-        // async function capitalizeFirstLetter(str) {
-        //     return temperament.charAt(0).toUpperCase() + str.slice(1);
-        //   }
-        //   capitalizeFirstLetter(temperament); 
 
-        // console.log(temperament)
         for await (const temp of temperament)  {
             const ide2 = uuidv4();
         let createdTemperament = await Temperament.findOne({
             where: { temperament: temp },
           });
-        //   console.log(createdTemperament)
+
           if (!createdTemperament) createdTemperament = await Temperament.create({
             id: ide2,
             temperament: temp
@@ -92,12 +70,9 @@ async function addDog(req, res, next){
         // =
         // await createdTemperament.addDog(createdDog);
         
-        // Para responder con el perroo creado y su temperamento
-        const newDogTemp = {...createdDog, createdTemperament}
-      
-        // if (!name || !weight || !height || !life_span || !temperament){
-        //   return res.render('error', {message: "Mensaje de error"});
-        // }
+        // Para responder con el perro creado y su temperamento
+        // const newDogTemp = {...createdDog, createdTemperament}
+        // res.json(newDogTemp);
     
         res.send("dog created");
     }

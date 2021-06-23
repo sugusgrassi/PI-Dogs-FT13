@@ -11,7 +11,7 @@ router.get('/:id', dogById)
 //     res.send("Dogs")
 // })
 
-router.post('/', addDog)
+// router.post('/', addDog)
 
 
 module.exports = router;
