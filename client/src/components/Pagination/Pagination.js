@@ -16,9 +16,7 @@ const Pagination = ({totalDogs,dogsPerPage, paginate, currentPage}) => {
     // Cada vez que se renderiza que empiece en 1 para dogs || query.name
     useEffect(() => {
         paginate(1)
-        }, []);
-
-        console.log(currentPage)
+        }, [paginate]);
     
     return (
         <nav>
@@ -38,17 +36,16 @@ const Pagination = ({totalDogs,dogsPerPage, paginate, currentPage}) => {
     )
 }
 
-// export default Pagination;
 
 
 function mapStateToProps(state) {
     return {
         dogsPerPage: state.dogsPerPage,
         currentPage: state.currentPage
-};
-  }
+    };
+}
 
 export default connect(
     mapStateToProps,
     {paginate}
-  )(Pagination);
+)(Pagination);

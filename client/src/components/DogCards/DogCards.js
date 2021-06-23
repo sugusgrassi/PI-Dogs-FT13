@@ -1,24 +1,19 @@
 import React, { useEffect } from 'react';
 import Pagination from '../Pagination/Pagination'
 import { connect } from 'react-redux';
-import { getDogs, paginate, stopLoading, setTempDog, clearDogDetail } from '../../actions/index';
+import { getDogs, paginate, setTempDog, clearDogDetail } from '../../actions/index';
 import { Link } from 'react-router-dom';
 import './DogCards.css';
 
 function DogCards(props) {
-    const {dogs, loading, dogsPerPage, currentPage, stopLoading, selectedTempDogs, zA, azWeight, clearDogDetail} = props;
+    const {dogs, loading, dogsPerPage, currentPage, selectedTempDogs, zA, azWeight, clearDogDetail} = props;
 
     useEffect(()=>{
         clearDogDetail()
         
-    }, [])
+    }, [clearDogDetail])
 
-    // useEffect(() => {
-    //     const timer = setTimeout(() => {
-    //         stopLoading();
-    //     }, 4000);
-    //     return () => clearTimeout(timer);
-    //   }, []);
+
     
     function compare( a, b ) {
     if (!azWeight) {
@@ -55,22 +50,17 @@ function DogCards(props) {
     const indexOfLastDog = currentPage *  dogsPerPage;
     const indexOfFirstDog = indexOfLastDog - dogsPerPage;
     if (selectedTempDogs.length > 0){
-
         selectedTempDogs.sort( compare );
-
-    currentDogs = selectedTempDogs.slice(indexOfFirstDog, indexOfLastDog);
+        currentDogs = selectedTempDogs.slice(indexOfFirstDog, indexOfLastDog);
     // falta pasar breedName a redux y hacer un  else if (selectedTempDogs.length === 0 && breedName) y pasar dog a []
     } else {
-       
         dogs.sort( compare );
-
         currentDogs = dogs.slice(indexOfFirstDog, indexOfLastDog);
-        console.log(currentDogs)
     }
 
 
     if (loading) {
-      return <h2>Loading...</h2>
+        return <h2>Loading...</h2>
     }
 
 
@@ -113,8 +103,8 @@ function mapStateToProps(state) {
 
 export default connect(
     mapStateToProps,
-    {getDogs, paginate, stopLoading, setTempDog, clearDogDetail}
-  )(DogCards);
+    {getDogs, paginate, setTempDog, clearDogDetail}
+)(DogCards);
 
 
 

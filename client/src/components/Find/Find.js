@@ -20,8 +20,7 @@ const Find = (props) => {
       }
 
       useEffect(() => {
-        console.log("componentDidUpdate: se modificó el state")
-        
+        // console.log("Se modificó el state")        
         // props.setTempDog("")
         props.getDogsByName("?name="+breedName)
         // props.setdogApiDB()
@@ -41,7 +40,6 @@ const Find = (props) => {
 
     return (
         <div >
-            {/* <h1>Find a breed by name, temperament or word</h1> */}
         <form className="findContainer" onSubmit={(e) => handleSubmit(e)} onReset={(e) => handleFormReset(e)}>
         <div>
           {/* <label className="" htmlFor="breedName" >Breed? </label> */}

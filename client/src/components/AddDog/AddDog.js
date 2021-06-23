@@ -27,7 +27,7 @@ const AddDog = ({getDogs, getTemperaments}) => {
 
 
     function validateImageDog(value) {
-        if(!/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi.test(value)) {
+        if(!/[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)?/gi.test(value)) {
           setError('↑ It must be an URL');
         } else {
           setError('');

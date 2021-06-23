@@ -7,7 +7,7 @@ const Nav = () => {
     return (
         <nav>
             <Link className={"navLinks"} to='/'>
-                <h1>Who let the dogs app</h1>
+                <h1 className="title">Who let the dogs app</h1>
                 <img className={"rocketDog"} src={rocketDog} alt="rocket dog"/>
             </Link>
             <NavLink className={"navLinks"} exact={true} activeClassName='is-active' to='/dogs'>Escaped Dogs</NavLink>

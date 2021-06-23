@@ -10,12 +10,10 @@ import './Landing.css';
 
 const Landing = ({getDogs}) => {
 
-    let str = "";
-
     useEffect(() => {
-    getDogs(str)
-    // props.paginate(1)
-    }, []);
+        getDogs("")
+        // props.paginate(1)
+    }, [getDogs]);
 
     return (
         // <div style={{position: "absolute", backgroundImage: "url(https://www.thesun.co.uk/wp-content/uploads/2016/07/nintchdbpict000254504787-e1469489555217.jpg)", backgroundColor: "#aaa",  width: "100%", height: "100%"}}>
@@ -31,12 +29,7 @@ const Landing = ({getDogs}) => {
         <Link to='/dogs'>
             <img  src={logo} className="logo"
                 style={{position: "absolute", left: "50%", top: "50%", zIndex: "1", transform: "translate(-50%, -50%)"}}  
-            />
-            {/* <img  src={logo2} className="logo2"
-                style={{position: "absolute", left: "50%", top: "50%", zIndex: "1", transform: "translate(-50%, -50%)"}}  
-            /> */}
-            {/* <button style={{position: "absolute", margin: "0 auto", top: "50%", fontSize: "2rem"}}> Enter
-            </button> */}
+            alt="logo" />
         </Link>
         </div>
     )

@@ -1,6 +1,5 @@
 import './App.css';
-import React, { useState, useEffect } from 'react';
-import DogCards from './components/DogCards/DogCards.js';
+import React from 'react';
 import { Route, Switch } from "react-router";
 import Landing from './components/Landing/Landing';
 import DogContainer from './components/DogContainer/DogContainer';
@@ -11,7 +10,6 @@ import AddDogThanks from './components/AddDog/AddDogThanks';
 import Footer from './components/Footer/Footer';
 import About from './components/About/About';
 import E404 from './components/E404/E404';
-import Temperaments from './components/Temperaments/Temperaments';
 import Dog from './components/Dog/Dog';
 
 

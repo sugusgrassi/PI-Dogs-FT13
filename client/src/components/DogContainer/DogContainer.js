@@ -12,19 +12,17 @@ const DogContainer = (props) => {
     const [azWeight, setWeight] = useState(false);
     const [showTemp, setShowTemp] = useState(false);
     
-        useEffect(()=>{
+    useEffect(()=>{
         props.getDogs("");
     }, [])
 
     function handleChangeAZW() {
-        // console.log("modificó el value")
         // props.getDogs("")
         // props.setdogApiDB();
         setWeight(!azWeight)
         }
 
     function handleChange() {
-        // console.log("modificó el value")
         // props.getDogs("")
         // props.setdogApiDB();
         setValue(!value)
@@ -51,27 +49,31 @@ const DogContainer = (props) => {
     return (
         <div >
             <h1>Find the dogs!</h1>
-            <div className="flexContainer">
+            <div className="flexfilters">
+            <div className="flexContainer flexmargin">
                 <Find />
-                <button onClick={() => apiClick()} className={props.dogs.length === props.apiDogsArr.length ? "activeButton" : ""}>Api</button>
-                <button onClick={dbClick} className="apidbButton">DB</button>
-                <div className="flexContainer">
-                    <span>Data type: Name </span>
-                    <Switchazw
-                        azWeight={azWeight}
-                        handleToggleazw={() => handleChangeAZW()}
-                    />
-                    <span> Weight</span>
+                    <button onClick={() => apiClick()} className={props.dogs.length === props.apiDogsArr.length ? "activeButton" : ""}>Api</button>
+                    <button onClick={dbClick} className="apidbButton">DB</button>
                 </div>
-                <div className="flexContainer">
-                    <span>Order: ↑ </span>
-                    <Switch
-                        isOn={value}
-                        handleToggle={() => handleChange()}
-                    />
-                    <span> ↓</span>
+                <div className="flexContainer flexmargin">
+                    <div className="flexContainer">
+                        <span><strong>Order:</strong> Name </span>
+                        <Switchazw
+                            azWeight={azWeight}
+                            handleToggleazw={() => handleChangeAZW()}
+                        />
+                        <span> Weight   </span>
+                    </div>
+                    <div className="flexContainer">
+                        <span>|    ↑</span>
+                        <Switch
+                            isOn={value}
+                            handleToggle={() => handleChange()}
+                        />
+                        <span>↓</span>
+                    </div>
                 </div>
-                <div className="flexContainer">
+                <div className="flexContainer flexmargin">
                 <button onClick={onClick} className={showTemp ? "activeButton" : "" }>{showTemp ? "Hide temperaments" : "Show temperaments"}</button>
                 </div>
             </div>

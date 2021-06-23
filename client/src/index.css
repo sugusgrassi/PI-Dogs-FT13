@@ -26,6 +26,10 @@ font-family: 'Space Mono', monospace;
 font-family: 'Teko', sans-serif; */
 
 
+.flexmargin {
+  margin-top: 16px; 
+}
+
 .flexContainer {
   display: flex;
   justify-content: space-around;
@@ -34,7 +38,33 @@ font-family: 'Teko', sans-serif; */
   text-decoration: none;
   /* max-width: 960px; */
   flex-wrap: wrap;
+  margin-left: 8px;
+  margin-right: 8px;
+  
 }
+
+.flexfilters {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* border: 1px solid black; */
+  text-decoration: none;
+  /* max-width: 960px; */
+  flex-wrap: wrap;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .flexfilters {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 454px) {
+
+}
+
 
 
 /* * {

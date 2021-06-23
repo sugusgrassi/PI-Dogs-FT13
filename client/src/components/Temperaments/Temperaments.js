@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux';
 import { getTemperaments, getDogs, setTempDog, paginate, setdogApiDB} from '../../actions/index';
 import './Temperaments.css';
@@ -9,7 +9,7 @@ function Temperaments({getTemperaments, temperaments, dogs, getDogs, setTempDog,
         getTemperaments()
         // getDogs("")
         // setdogApiDB()
-      },[])
+      },[getTemperaments])
  
   
     function compareDogsTemp(e){
