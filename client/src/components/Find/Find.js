@@ -21,10 +21,11 @@ const Find = (props) => {
 
       useEffect(() => {
         console.log("componentDidUpdate: se modificó el state")
-        props.paginate(1)
+        
         // props.setTempDog("")
         props.getDogsByName("?name="+breedName)
-        props.setdogApiDB()
+        // props.setdogApiDB()
+        props.paginate(1)
       },[breedName])
 
       function handleFormReset(event) {
@@ -32,7 +33,7 @@ const Find = (props) => {
         props.setTempDog("")
         setBreedName("")
         // props.getDogs("")
-        // Para que no llame una y otra vez a la api y sea más rápido
+        // Para que no llame una y otra vez a la api y sea más rápido. resetea dog a apidb con todos los perros
         props.setdogApiDB()
         props.paginate(1)
 

@@ -10,7 +10,7 @@ const initialState = {
     selectedTempDogs: [],
     loading: true,
     currentPage: 1,
-    dogsPerPage: 9
+    dogsPerPage: 12
 }
 
 function rootReducer(state = initialState, action){
@@ -40,7 +40,8 @@ function rootReducer(state = initialState, action){
     if (action.type === CLEAR_DOG_DETAIL) {
         return {
             ...state,
-            dogDetail: {}        }
+            dogDetail: {}        
+        }
     }
     if (action.type === GET_TEMP) {
         return {

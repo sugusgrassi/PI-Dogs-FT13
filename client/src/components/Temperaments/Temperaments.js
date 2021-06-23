@@ -8,13 +8,12 @@ function Temperaments({getTemperaments, temperaments, dogs, getDogs, setTempDog,
     useEffect(() => {
         getTemperaments()
         // getDogs("")
-        setdogApiDB()
+        // setdogApiDB()
       },[])
  
   
-      
     function compareDogsTemp(e){
-      setdogApiDB();
+      // setdogApiDB();
       let arrTempDogs = []
       for (var dog of dogs) {
           if (dog.temperament?.includes(e.target.value)){
@@ -24,19 +23,9 @@ function Temperaments({getTemperaments, temperaments, dogs, getDogs, setTempDog,
       
       // Cambia el state de selectedTempDogs en Redux, para llevarlo a la DogCards
       setTempDog(arrTempDogs)
-        // setTempDog(arrTempDogs.map((dog) => (
-        //   <div key={dog.id}>
-        //       {/* <img src={dog.image} alt={dog.name} /> */}
-        //       <h2>{dog.name}</h2>
-        //           <div>
-        //               <span>{dog.temperament}</span>
-        //               <span>{dog.height}</span>
-        //               <span>{dog.weight}</span>
-        //               <span>{dog.life_span}</span>
-        //           </div>
-        //   </div>
-        //   )))
-        paginate(1)
+
+      paginate(1)
+
     }
 
  
@@ -51,8 +40,6 @@ function Temperaments({getTemperaments, temperaments, dogs, getDogs, setTempDog,
               onClick={(e) => compareDogsTemp(e)}
               >{temperament.temperament}</button>
           ))}
-
-          {/* <div>hola {selectedTempDogs}</div> */}
 
         </div>
     )

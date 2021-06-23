@@ -7,15 +7,10 @@ import './DogCards.css';
 
 function DogCards(props) {
     const {dogs, loading, dogsPerPage, currentPage, stopLoading, selectedTempDogs, zA, azWeight, clearDogDetail} = props;
-    // const [currentPage, setCurrentPage] = useState([1]);
 
-    // si str = "" trae todos
-    // si le agrego page limit trae el páginado del back
-
-    // let str = "23erf";
-    // let str = "?name=Terrier";
     useEffect(()=>{
         clearDogDetail()
+        
     }, [])
 
     // useEffect(() => {
@@ -24,17 +19,6 @@ function DogCards(props) {
     //     }, 4000);
     //     return () => clearTimeout(timer);
     //   }, []);
-
-
-    // function compareAZ( b, a ) {
-    // if ( a.weight < b.weight ){
-    //     return -1;
-    // }
-    // if ( a.weight > b.weight ){
-    //     return 1;
-    // }
-    // return 0;
-    // }
     
     function compare( a, b ) {
     if (!azWeight) {
@@ -67,7 +51,6 @@ function DogCards(props) {
     }
    
 
-
     let currentDogs;
     const indexOfLastDog = currentPage *  dogsPerPage;
     const indexOfFirstDog = indexOfLastDog - dogsPerPage;
@@ -76,12 +59,13 @@ function DogCards(props) {
         selectedTempDogs.sort( compare );
 
     currentDogs = selectedTempDogs.slice(indexOfFirstDog, indexOfLastDog);
-    
+    // falta pasar breedName a redux y hacer un  else if (selectedTempDogs.length === 0 && breedName) y pasar dog a []
     } else {
        
         dogs.sort( compare );
 
         currentDogs = dogs.slice(indexOfFirstDog, indexOfLastDog);
+        console.log(currentDogs)
     }
 
 
@@ -110,7 +94,7 @@ function DogCards(props) {
               </div>
             ))}
             </div>) : <h3>We couldn't catch any dog, please press Show all or try later</h3>}
-            <div className="pagination" >{selectedTempDogs ? (<Pagination totalDogs={selectedTempDogs.length} />): <Pagination totalDogs={dogs.length} />}</div> 
+            <div className="pagination" >{selectedTempDogs.length > 0 ? <Pagination totalDogs={selectedTempDogs.length} />: <Pagination totalDogs={dogs.length} />}</div> 
         </div>
     )
 

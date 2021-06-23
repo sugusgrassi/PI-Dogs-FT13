@@ -39,15 +39,11 @@ const DogContainer = (props) => {
     };
 
     const apiClick = () => {
-        
         props.apiDogs();
-        console.log(apiDogs);
     };
 
     const dbClick = () => {
-  
        props.dbDogs();
-        console.log(apiDogs);
     };
     
 
