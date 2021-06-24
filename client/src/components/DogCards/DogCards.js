@@ -84,11 +84,29 @@ function DogCards(props) {
               </div>
             ))}
             </div>) : <h3>We couldn't catch any dog, please press Show all or try later</h3>}
-            <div className="pagination" >{selectedTempDogs.length > 0 ? <Pagination totalDogs={selectedTempDogs.length} />: <Pagination totalDogs={dogs.length} />}</div> 
+            <div className="pagination" >{
+                selectedTempDogs.length > 12  ? <Pagination totalDogs={selectedTempDogs.length} />
+                : !selectedTempDogs && dogs.length > 12 ? <Pagination totalDogs={dogs.length} />
+                : <></>
+            }
+            </div> 
         </div>
     )
 
 }
+
+/* if (selectedTempDogs.length > 12) {
+<Pagination totalDogs={selectedTempDogs.length} />
+}
+else if (dogs.length > 12) {
+  <Pagination totalDogs={dogs.length} />  
+}
+else {
+
+}
+
+
+*/
 
 function mapStateToProps(state) {
     return {
