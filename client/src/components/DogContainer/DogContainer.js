@@ -14,6 +14,7 @@ const DogContainer = (props) => {
     
     useEffect(()=>{
         props.getDogs("");
+        
     }, [])
 
     function handleChangeAZW() {
@@ -44,6 +45,9 @@ const DogContainer = (props) => {
        props.dbDogs();
     };
     
+    const showTempcb = () => {
+        setShowTemp(false)
+    }
 
 
     return (
@@ -53,11 +57,11 @@ const DogContainer = (props) => {
             <div className="flexContainer flexmargin">
                 <Find />
                     <button onClick={() => apiClick()} className={props.dogs.length === props.apiDogsArr.length ? "activeButton" : ""}>Api</button>
-                    <button onClick={dbClick} className="apidbButton">DB</button>
+                    <button onClick={dbClick} className={props.dogs.every(dog => typeof dog.id === "string") === true ? "activeButton" : ""}>DB</button>
                 </div>
                 <div className="flexContainer flexmargin">
                     <div className="flexContainer">
-                        <span><strong>Order:</strong> Name </span>
+                        <span><strong>Order by:</strong> Name </span>
                         <Switchazw
                             azWeight={azWeight}
                             handleToggleazw={() => handleChangeAZW()}
@@ -77,7 +81,7 @@ const DogContainer = (props) => {
                 <button onClick={onClick} className={showTemp ? "activeButton" : "" }>{showTemp ? "Hide temperaments" : "Show temperaments"}</button>
                 </div>
             </div>
-            { showTemp ? <Temperaments/>  : null }
+            { showTemp ? <Temperaments showTempcb={showTempcb}/>  : null }
             <DogCards zA = {value} azWeight = {azWeight} />
         </div>
     )

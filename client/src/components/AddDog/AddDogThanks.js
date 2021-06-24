@@ -6,9 +6,14 @@ import { getDogs } from '../../actions/index';
 
 const AddDogThanks = ({getDogs}) => {
  
-    useEffect(()=>{
-        getDogs("");
-    }, [getDogs])
+    useEffect(() => {
+      
+        // returned function will be called on component unmount 
+        return () => {
+           getDogs("");
+        }
+      }, [getDogs])
+
 
     return (
         <div >

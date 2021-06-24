@@ -14,32 +14,6 @@ import Dog from './components/Dog/Dog';
 
 
 function App() {
-
-  // const [dogs, setDogs] = useState([]);
-  // const [loading, setLoading] = useState(false);
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const [dogsPerPage] = useState(8);
-
-  // pageNumber = number 
-  // const paginate = (pageNumber) => setCurrentPage(pageNumber)
-
-  // useEffect (() => {
-  //   const fetchDogs = async () => {
-  //     setLoading(true);
-  //     const res = await axios.get(BASE_URL);
-  //     setDogs(res.data);
-  //     setLoading(false)
-  //   }
-  //   fetchDogs() 
-
-  // }, []); // With [] it only runs when it mounts
-  // // console.log(dogs)
-
-
-  // const indexOfLastDog = currentPage *  dogsPerPage;
-  // const indexOfFirstDog = indexOfLastDog - dogsPerPage;
-  // const currentDogs = dogs.slice(indexOfFirstDog, indexOfLastDog);
-  
   return (
     <div className="App">
       <Route path="/" exact component={Landing} />

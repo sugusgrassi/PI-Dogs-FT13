@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getDogDetail } from '../../actions/index';
+import { getDogDetail, clearDogDetail } from '../../actions/index';
 import './Dog.css';
 
 function Dog(props) {
-    console.log(props.match.params.id)
 
     useEffect(()=>{
+        
         const dogId = props.match.params.id;
-        props.getDogDetail(dogId)
+        props.getDogDetail(dogId);
     }, [])
-    console.log(props.dogDetail)
+
+
 
     return (
         <div>
@@ -47,5 +48,5 @@ function mapStateToProps(state) {
 
 export default connect(
     mapStateToProps,
-    {getDogDetail}
+    {getDogDetail, clearDogDetail}
   )(Dog);

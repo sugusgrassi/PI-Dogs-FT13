@@ -73,7 +73,8 @@ function rootReducer(state = initialState, action){
         return {
             ...state,
             dogs: state.apiDB,
-            dogs: state.apiDogsArr
+            apiDogsArr: state.apiDB.filter(dog => typeof dog.id === "number"),
+            dogs: state.apiDogsArr,
         }
     }
     if (action.type === DB_DOGS) {
@@ -82,7 +83,8 @@ function rootReducer(state = initialState, action){
         return {
             ...state,
             dogs: state.apiDB,
-            dogs: state.dbDogsArr
+            dbDogsArr: state.apiDB.filter(dog => typeof dog.id === "string"),
+            dogs: state.dbDogsArr,
         }
     }
     if (action.type === SET_DOG_API_DB) {

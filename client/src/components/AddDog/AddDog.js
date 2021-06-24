@@ -16,6 +16,7 @@ const AddDog = ({getDogs, getTemperaments}) => {
         image: ""
     })
     const [error, setError] = useState("");
+    const [errorW, setErrorW] = useState("");
     let history = useHistory();
 
 
@@ -34,6 +35,16 @@ const AddDog = ({getDogs, getTemperaments}) => {
         }
         setNewDog(prevState =>
             ({...prevState, image: value}));
+    }
+
+    function validateNumber(value) {
+        if(!/^[0-9- +]*$/gi.test(value)) {
+            setErrorW('↑ Weight must be a number ');
+        } else {
+            setErrorW('');
+        }
+        setNewDog(prevState =>
+            ({...prevState, weight: value}));
     }
 
     function handleSubmit(e) {
@@ -57,8 +68,8 @@ const AddDog = ({getDogs, getTemperaments}) => {
                 <form className="addDogForm" onSubmit={(e) => handleSubmit(e)}>
                     <input name="dogname" value={newDog.name} placeholder="Dog name" onChange={(e)=> setNewDog(prevState =>
                         ({...prevState, name: e.target.value}))}/>
-                    <input name="weight" value={newDog.weight} placeholder="Dog weight" onChange={(e)=> setNewDog(prevState =>
-                        ({...prevState, weight: e.target.value}))}/>
+                    <input name="weight" value={newDog.weight} placeholder="Dog weight" onChange={(e)=> validateNumber(e.target.value)}/>
+                    {!errorW ? null : <span className="formError">{errorW}</span>}
                     <input name="height" value={newDog.height} placeholder="Dog height" onChange={(e)=> setNewDog(prevState =>
                         ({...prevState, height: e.target.value}))}/>
                     <input name="life_span" value={newDog.life_span} placeholder="Dog life_span" onChange={(e)=> setNewDog(prevState =>
@@ -67,7 +78,7 @@ const AddDog = ({getDogs, getTemperaments}) => {
                         ({...prevState, temperament: [e.target.value]}))}/>
                     <input name="image" value={newDog.image} placeholder="Dog image URL" onChange={(e)=> validateImageDog(e.target.value)}/>
                     {!error ? null : <span className="formError">{error}</span>}
-                    <div className="divSubmit"><input className="inputbutton" type="submit" disabled={!isEnabled || error}/></div>
+                    <div className="divSubmit"><input className="inputbutton" type="submit" disabled={!isEnabled || error || errorW}/></div>
                 </form>
             </div>
         </div>

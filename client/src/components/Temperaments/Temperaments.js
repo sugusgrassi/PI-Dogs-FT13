@@ -1,24 +1,23 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux';
-import { getTemperaments, getDogs, setTempDog, paginate, setdogApiDB} from '../../actions/index';
+import { getTemperaments, setTempDog, paginate} from '../../actions/index';
 import './Temperaments.css';
 
-function Temperaments({getTemperaments, temperaments, dogs, getDogs, setTempDog, selectedTempDogs, paginate, setdogApiDB}) {
+function Temperaments({getTemperaments, temperaments, dogs, setTempDog, paginate, showTempcb}) {
 
     useEffect(() => {
         getTemperaments()
-        // getDogs("")
-        // setdogApiDB()
+
       },[getTemperaments])
  
   
     function compareDogsTemp(e){
-      // setdogApiDB();
       let arrTempDogs = []
       for (var dog of dogs) {
           if (dog.temperament?.includes(e.target.value)){
           arrTempDogs.push(dog)
           }
+          showTempcb()
       }
       
       // Cambia el state de selectedTempDogs en Redux, para llevarlo a la DogCards
@@ -55,5 +54,5 @@ function mapStateToProps(state) {
 
 export default connect(
     mapStateToProps,
-    {getTemperaments, getDogs, setTempDog, paginate, setdogApiDB}
+    {getTemperaments, setTempDog, paginate}
   )(Temperaments);
