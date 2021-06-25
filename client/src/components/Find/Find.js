@@ -24,6 +24,7 @@ const Find = (props) => {
         // props.setTempDog("")
         props.getDogsByName("?name="+breedName)
         // props.setdogApiDB()
+        props.setTempDog("")
         props.paginate(1)
       },[breedName])
 
