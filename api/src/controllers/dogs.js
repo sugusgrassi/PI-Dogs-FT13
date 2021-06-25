@@ -24,7 +24,7 @@ function getAllDogs(req, res, next){
             if (filteredDogs.length > 0) {
                 // let firstEight = filteredDogs.splice(0, 8);
                  
-                // Paginado desde la API
+                // req.query.name && !req.query.page = Paginado al front
                 if (!req.query.page) {
                     // let firstEight = filteredDogs.slice(0, 8);
                     let firstEight = filteredDogs;
@@ -32,8 +32,8 @@ function getAllDogs(req, res, next){
                     return res.json(firstEight);
                 }
 
+                // req.query.name && req.query.page = Paginado a la API
                 simplifiedDog(filteredDogs);
-                
                 const page = parseInt(req.query.page)
                 const limit = parseInt(req.query.limit)
                 const startIndex = (page - 1) * limit;
@@ -51,14 +51,13 @@ function getAllDogs(req, res, next){
         }
 
         if (!req.query.page) {
-            
-            // Pagination in the front
+            // !req.query.name && !req.query.page = Paginado al front
             let firstEight = whoLetTheDogsOut;
             simplifiedDog(firstEight);
             return res.json(firstEight);
         }
 
-
+        // !req.query.name && req.query.page = Paginado a la API
         simplifiedDog(whoLetTheDogsOut)  // trae los datos necesarios
         // https://medium.com/learnfactory-nigeria/create-a-pagination-middleware-with-node-js-fe4ec5dca80f
         const page = parseInt(req.query.page)
