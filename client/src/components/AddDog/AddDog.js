@@ -15,8 +15,13 @@ const AddDog = ({getDogs, getTemperaments}) => {
         temperament: [],
         image: ""
     })
-    const [error, setError] = useState("");
+
+    const [errorN, setErrorN] = useState("");
     const [errorW, setErrorW] = useState("");
+    const [errorH, setErrorH] = useState("");
+    const [errorLS, setErrorLS] = useState("");
+    const [errorT, setErrorT] = useState("");
+    const [error, setError] = useState("");
     let history = useHistory();
 
 
@@ -27,6 +32,57 @@ const AddDog = ({getDogs, getTemperaments}) => {
       },[getTemperaments])
 
 
+
+    function validateDogN(value) {
+        if(!/^[-a-zA-Z +]*$/gi.test(value)) {
+            setErrorN('↑ Name must be alphabetical');
+        } else {
+            setErrorN('');
+        }
+        setNewDog(prevState =>
+            ({...prevState, name: value}));
+    }
+
+    function validateNumberW(value) {
+        if(!/^[0-9- +]*$/gi.test(value)) {
+            setErrorW('↑ Weight must be a number');
+        } else {
+            setErrorW('');
+        }
+        setNewDog(prevState =>
+            ({...prevState, weight: value}));
+    }
+
+    function validateNumberH(value) {
+        if(!/^[0-9- +]*$/gi.test(value)) {
+            setErrorH('↑ Height must be a number');
+        } else {
+            setErrorH('');
+        }
+        setNewDog(prevState =>
+            ({...prevState, height: value}));
+    }
+
+    function validateNumberLS(value) {
+        if(!/^[0-9- +]*$/gi.test(value)) {
+            setErrorLS('↑ Life span must be a number');
+        } else {
+            setErrorLS('');
+        }
+        setNewDog(prevState =>
+            ({...prevState, life_span: value}));
+    }
+
+    function validateDogT(value) {
+        if(!/^[-a-zA-Z +]*$/gi.test(value)) {
+            setErrorT('↑ Temperament must be alphabetical');
+        } else {
+            setErrorT('');
+        }
+        setNewDog(prevState =>
+            ({...prevState, temperament: [value]}));
+    }
+
     function validateImageDog(value) {
         if(!/[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)?/gi.test(value)) {
           setError('↑ It must be an URL');
@@ -35,16 +91,6 @@ const AddDog = ({getDogs, getTemperaments}) => {
         }
         setNewDog(prevState =>
             ({...prevState, image: value}));
-    }
-
-    function validateNumber(value) {
-        if(!/^[0-9- +]*$/gi.test(value)) {
-            setErrorW('↑ Weight must be a number ');
-        } else {
-            setErrorW('');
-        }
-        setNewDog(prevState =>
-            ({...prevState, weight: value}));
     }
 
     function handleSubmit(e) {
@@ -66,16 +112,18 @@ const AddDog = ({getDogs, getTemperaments}) => {
             <h1>Add dog</h1>
             <div className="dogCardsContainer">
                 <form className="addDogForm" onSubmit={(e) => handleSubmit(e)}>
-                    <input name="dogname" value={newDog.name} placeholder="Dog name" onChange={(e)=> setNewDog(prevState =>
-                        ({...prevState, name: e.target.value}))}/>
-                    <input name="weight" value={newDog.weight} placeholder="Dog weight" onChange={(e)=> validateNumber(e.target.value)}/>
+                    <input name="dogname" value={newDog.name} placeholder="Dog name" onChange={(e)=> validateDogN(e.target.value)}/>
+                    {!errorN ? null : <span className="formError">{errorN}</span>}
+                    <input name="weight" value={newDog.weight} placeholder="Dog weight" onChange={(e)=> validateNumberW(e.target.value)}/>
                     {!errorW ? null : <span className="formError">{errorW}</span>}
-                    <input name="height" value={newDog.height} placeholder="Dog height" onChange={(e)=> setNewDog(prevState =>
-                        ({...prevState, height: e.target.value}))}/>
-                    <input name="life_span" value={newDog.life_span} placeholder="Dog life_span" onChange={(e)=> setNewDog(prevState =>
-                        ({...prevState, life_span: e.target.value}))}/>
-                    <input name="temperament" value={newDog.temperament} placeholder="Dog temperament" onChange={(e)=> setNewDog(prevState =>
-                        ({...prevState, temperament: [e.target.value]}))}/>
+                    <input name="height" value={newDog.height} placeholder="Dog height" onChange={(e)=> validateNumberH(e.target.value)}/>
+                    {!errorH ? null : <span className="formError">{errorH}</span>}
+                    <input name="life_span" value={newDog.life_span} placeholder="Dog life span" onChange={(e)=> validateNumberLS(e.target.value)}/>
+                    {!errorLS ? null : <span className="formError">{errorLS}</span>}
+                    {/* <input name="temperament" value={newDog.temperament} placeholder="Dog temperament" onChange={(e)=> setNewDog(prevState =>
+                        ({...prevState, temperament: [e.target.value]}))}/> */}
+                    <input name="temperament" value={newDog.temperament} placeholder="Dog temperament" onChange={(e)=> validateDogT(e.target.value)}/>
+                    {!errorT ? null : <span className="formError">{errorT}</span>}
                     <input name="image" value={newDog.image} placeholder="Dog image URL" onChange={(e)=> validateImageDog(e.target.value)}/>
                     {!error ? null : <span className="formError">{error}</span>}
                     <div className="divSubmit"><input className="inputbutton" type="submit" disabled={!isEnabled || error || errorW}/></div>
