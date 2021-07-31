@@ -40,7 +40,30 @@ font-family: 'Teko', sans-serif; */
   flex-wrap: wrap;
   margin-left: 8px;
   margin-right: 8px;
-  
+}
+
+.mainNavContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.flexContainerRes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* border: 1px solid black; */
+  text-decoration: none;
+  /* max-width: 960px; */
+  flex-wrap: wrap;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+@media (max-width: 360px) {
+  .flexContainer {
+    justify-content: center;
+  }
 }
 
 .flexfilters {
@@ -55,11 +78,44 @@ font-family: 'Teko', sans-serif; */
   margin: 0 auto;
 }
 
+.flexfiltersRes {
+  display: none;
+}
+
+.filterbutton {
+  display: block;
+  margin: 0 auto;
+}
+
+
 @media (max-width: 768px) {
   .flexfilters {
     flex-direction: column;
   }
 }
+
+@media (max-width: 480px) {
+  .flexfilters {
+    display: none;
+  }
+  .flexfiltersRes {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* border: 1px solid black; */
+    text-decoration: none;
+    /* max-width: 960px; */
+    flex-wrap: wrap;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+}
+
+
+
+
+
 
 @media (max-width: 454px) {
 
@@ -72,6 +128,10 @@ font-family: 'Teko', sans-serif; */
 } */
 
 .inputbutton {
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
   position: relative;
   font-family: 'Space Mono', monospace; 
   font-weight: 900;
@@ -81,6 +141,7 @@ font-family: 'Teko', sans-serif; */
   box-shadow: 2px 2px black;
   left: -2px;
   top: -2px;
+
 }
 
 .inputbutton:hover {
@@ -96,6 +157,11 @@ font-family: 'Teko', sans-serif; */
 }
 
 input {
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-appearance: none;
   font-family: 'Space Mono', monospace; 
   font-weight: 400;
   background-color: white;
@@ -120,3 +186,4 @@ input {
 ul {
   list-style-type: none;
 }
+

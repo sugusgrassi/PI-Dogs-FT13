@@ -17,7 +17,6 @@ const AddDogThanks = ({getDogs}) => {
 
     return (
         <div >
-            <h1>Add dog</h1>
             <div className="dogCardsContainer">
                 <h2>Thanks for adding a dog</h2>
                 <Link to='/'><p>Keep on searching HERE!</p></Link>

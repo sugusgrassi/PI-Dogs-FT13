@@ -109,7 +109,7 @@ const AddDog = ({getDogs, getTemperaments}) => {
     // console.log(newDog.name)
     return (
         <div >
-            <h1>Add dog</h1>
+            <h1>Add a wanted dog</h1>
             <div className="dogCardsContainer">
                 <form className="addDogForm" onSubmit={(e) => handleSubmit(e)}>
                     <input name="dogname" value={newDog.name} placeholder="Dog name" onChange={(e)=> validateDogN(e.target.value)}/>

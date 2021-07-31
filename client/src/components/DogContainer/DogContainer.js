@@ -6,11 +6,18 @@ import Switchazw from '../Switch/Switchazw';
 import Temperaments from '../Temperaments/Temperaments';
 import { connect } from 'react-redux';
 import { getDogs, apiDogs, dbDogs, getTemperaments, setdogApiDB } from '../../actions/index';
+import { FaWeightHanging } from 'react-icons/fa';
+import { MdBlock, MdSortByAlpha } from 'react-icons/md';
+import { RiFilterOffFill } from 'react-icons/ri';
+import { RiFilterFill } from 'react-icons/ri';
+
+
 
 const DogContainer = (props) => {
     const [value, setValue] = useState(false);
     const [azWeight, setWeight] = useState(false);
     const [showTemp, setShowTemp] = useState(false);
+    const [showFilters, setShowFilters] = useState(false);
     
     useEffect(()=>{
         props.getDogs("");
@@ -49,6 +56,14 @@ const DogContainer = (props) => {
         setShowTemp(false)
     }
 
+    const handleFilter = () => {
+        setShowFilters(true)
+    }
+
+    const handleFilterfalse = () => {
+        setShowFilters(false)
+    }
+
 
     return (
         <div >
@@ -60,28 +75,77 @@ const DogContainer = (props) => {
                     <button onClick={dbClick} className={props.dogs.every(dog => typeof dog.id === "string") === true ? "activeButton" : ""}>DB</button>
                 </div>
                 <div className="flexContainer flexmargin">
-                    <div className="flexContainer">
-                        <span><strong>Order by:</strong> Name </span>
-                        <Switchazw
-                            azWeight={azWeight}
-                            handleToggleazw={() => handleChangeAZW()}
-                        />
-                        <span> Weight   </span>
-                    </div>
-                    <div className="flexContainer">
-                        <span>|    ↑</span>
-                        <Switch
-                            isOn={value}
-                            handleToggle={() => handleChange()}
-                        />
-                        <span>↓</span>
+                    
+                        <span><strong>Order by: </strong></span> 
+                        <div className="flexContainer">
+                            <span> Name</span> 
+                            <Switchazw
+                                azWeight={azWeight}
+                                handleToggleazw={() => handleChangeAZW()}
+                            />
+                            <div className="flexContainer">
+                            <span> Weight   </span>
+    
+                        
+                            <span>|    ↑</span>
+                            <Switch
+                                isOn={value}
+                                handleToggle={() => handleChange()}
+                            />
+                            <span>↓</span>
+                        </div>
                     </div>
                 </div>
                 <div className="flexContainer flexmargin">
                 <button onClick={onClick} className={showTemp ? "activeButton" : "" }>{showTemp ? "Hide temperaments" : "Show temperaments"}</button>
                 </div>
+                { showTemp ? <Temperaments showTempcb={showTempcb}/>  : null }
             </div>
-            { showTemp ? <Temperaments showTempcb={showTempcb}/>  : null }
+
+            {/*Responsive Filters*/}
+             {/* RiFilterOffFill setShowFilters */}
+            {!showFilters ? <div className="flexfiltersRes"> <button onClick={handleFilter}><strong>Filters <RiFilterFill/> </strong></button> </div>
+            : <>
+            <button className="filterbutton" onClick={handleFilterfalse}><strong>Filters <RiFilterOffFill/> </strong></button> 
+            <div className="flexfiltersRes">
+                <div className="flexContainerRes flexmargin">
+                    <Find />
+                        <div>
+                            <button onClick={() => apiClick()} className={props.dogs.length === props.apiDogsArr.length ? "activeButton" : ""}>Api</button>
+                            <button onClick={dbClick} className={props.dogs.every(dog => typeof dog.id === "string") === true ? "activeButton" : ""}>DB</button>
+                        </div>
+                    </div>
+    
+                    <div className="flexContainer flexmargin">
+                        
+                            <span><strong>Order by: </strong></span> 
+                            <div className="flexContainer">
+                                <MdSortByAlpha />
+                                <Switchazw
+                                    azWeight={azWeight}
+                                    handleToggleazw={() => handleChangeAZW()}
+                                />
+                                <div className="flexContainer">
+                                <FaWeightHanging />
+        
+                            
+                                
+                                <Switch
+                                    isOn={value}
+                                    handleToggle={() => handleChange()}
+                                />
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flexContainer flexmargin">
+                    <button onClick={onClick} className={showTemp ? "activeButton" : "" }>{showTemp ? "Hide temperaments" : "Show temperaments"}</button>
+                    </div>
+                    </div>
+                    { showTemp ? <Temperaments style={{display: "block"}} showTempcb={showTempcb}/>  : null }
+                </>
+                }
+
             <DogCards zA = {value} azWeight = {azWeight} />
         </div>
     )
