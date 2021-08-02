@@ -74,7 +74,7 @@ const AddDog = ({getDogs, getTemperaments, temperaments}) => {
     }
 
     function validateDogT(value) {
-        if(!/^[-a-zA-Z +]*$/gi.test(value)) {
+        if(!/^[-a-zA-Z+]*$/gi.test(value)) {
             setErrorT('↑ Temperament must be alphabetical');
         } else {
             setErrorT('');
@@ -107,23 +107,31 @@ const AddDog = ({getDogs, getTemperaments, temperaments}) => {
     const isEnabled = newDog.name.length > 0 && newDog.weight.length > 0 && newDog.life_span.length > 0 && newDog.temperament.length > 0 && newDog.image.length > 0;
 console.log(temperaments)
     // console.log(newDog.name)
+    function toTitleCase(str) {
+        return str.replace(
+          /\w\S*/g,
+          function(txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+          }
+        );
+      }
     return (
         <div >
             <h1>Add a wanted dog</h1>
             <div className="dogCardsContainer">
                 <form className="addDogForm" onSubmit={(e) => handleSubmit(e)}>
-                    <input name="dogname" value={newDog.name} placeholder="Dog name" onChange={(e)=> validateDogN(e.target.value)}/>
+                    <input name="dogname" value={newDog.name} placeholder="Dog name" onChange={(e)=> validateDogN(e.target.value)} maxlength="20"/>
                     {!errorN ? null : <span className="formError">{errorN}</span>}
-                    <input name="weight" value={newDog.weight} placeholder="Dog weight" onChange={(e)=> validateNumberW(e.target.value)}/>
+                    <input name="weight" value={newDog.weight} placeholder="Dog weight" onChange={(e)=> validateNumberW(e.target.value)} maxlength="20"/>
                     {!errorW ? null : <span className="formError">{errorW}</span>}
-                    <input name="height" value={newDog.height} placeholder="Dog height" onChange={(e)=> validateNumberH(e.target.value)}/>
+                    <input name="height" value={newDog.height} placeholder="Dog height" onChange={(e)=> validateNumberH(e.target.value)} maxlength="20"/>
                     {!errorH ? null : <span className="formError">{errorH}</span>}
-                    <input name="life_span" value={newDog.life_span} placeholder="Dog life span" onChange={(e)=> validateNumberLS(e.target.value)}/>
+                    <input name="life_span" value={newDog.life_span} placeholder="Dog life span" onChange={(e)=> validateNumberLS(e.target.value)} maxlength="20"/>
                     {!errorLS ? null : <span className="formError">{errorLS}</span>}
                     {/* <input name="temperament" value={newDog.temperament} placeholder="Dog temperament" onChange={(e)=> setNewDog(prevState =>
                         ({...prevState, temperament: [e.target.value]}))}/> */}
                     <label style={{textAlign: "left"}}>Choose or create temperament:</label>
-                    <select name="temperament" value={[newDog.temperament]} onChange={(e)=> validateDogT(e.target.value)} multiple>
+                    <select name="temperament" value={[newDog.temperament]} onChange={(e)=> validateDogT(toTitleCase(e.target.value))} multiple>
                         {temperaments?.map((temp) => (
                             <option 
                             key={temp.id} 
@@ -131,7 +139,7 @@ console.log(temperaments)
                             >{temp.temperament}</option>
                         ))}
                     </select>
-                    <input name="temperament" value={newDog.temperament} placeholder="Dog temperament" onChange={(e)=> validateDogT(e.target.value)}/>
+                    <input name="temperament" value={newDog.temperament} placeholder="Dog temperament" onChange={(e)=> validateDogT(toTitleCase(e.target.value))} maxlength="45"/>
                     {!errorT ? null : <span className="formError">{errorT}</span>}
                     <input name="image" value={newDog.image} placeholder="Dog image URL" onChange={(e)=> validateImageDog(e.target.value)}/>
                     {!error ? null : <span className="formError">{error}</span>}
