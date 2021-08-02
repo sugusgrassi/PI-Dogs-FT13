@@ -17,6 +17,10 @@ const Pagination = ({totalDogs,dogsPerPage, paginate, currentPage}) => {
     useEffect(() => {
         paginate(1)
         }, [paginate]);
+
+    const handlePagination = () => {
+        window.scroll({top: 0, left: 0, behavior: 'smooth' });
+    }
     
     return (
         <nav>
@@ -24,7 +28,7 @@ const Pagination = ({totalDogs,dogsPerPage, paginate, currentPage}) => {
                {pageNumbers.map(number => (
                    <li key={number} style={{display: "inline", margin: "0 5px"}}>
                        <button 
-                       onClick={() => paginate(number)} href='!#'
+                       onClick={() => {paginate(number); handlePagination()}} href='!#'
                        className={currentPage === number ? "activeButton" : ""}
                        >
                            {number} 

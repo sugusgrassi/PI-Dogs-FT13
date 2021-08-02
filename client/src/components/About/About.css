@@ -37,4 +37,13 @@
     .albumInfo {
     text-align: center;
     }
+    .albumInfoContainer {
+        margin-left: 0px;
+    }
+    .albumImage {
+        max-width: 320px;
+    }
+    .albumContainer {
+        width: 90%;
+    }
 }

@@ -6,7 +6,7 @@ import "./AddDog.css";
 import { connect } from 'react-redux';
 import { getDogs, getTemperaments } from '../../actions/index';
 
-const AddDog = ({getDogs, getTemperaments}) => {
+const AddDog = ({getDogs, getTemperaments, temperaments}) => {
     const [newDog, setNewDog] = useState({
         name: "",
         weight: "",
@@ -103,9 +103,9 @@ const AddDog = ({getDogs, getTemperaments}) => {
         //   getDogs("")
        history.push('/thanks');
     }
-
+ console.log(newDog)
     const isEnabled = newDog.name.length > 0 && newDog.weight.length > 0 && newDog.life_span.length > 0 && newDog.temperament.length > 0 && newDog.image.length > 0;
-
+console.log(temperaments)
     // console.log(newDog.name)
     return (
         <div >
@@ -122,6 +122,15 @@ const AddDog = ({getDogs, getTemperaments}) => {
                     {!errorLS ? null : <span className="formError">{errorLS}</span>}
                     {/* <input name="temperament" value={newDog.temperament} placeholder="Dog temperament" onChange={(e)=> setNewDog(prevState =>
                         ({...prevState, temperament: [e.target.value]}))}/> */}
+                    <label style={{textAlign: "left"}}>Choose or create temperament:</label>
+                    <select name="temperament" value={[newDog.temperament]} onChange={(e)=> validateDogT(e.target.value)} multiple>
+                        {temperaments?.map((temp) => (
+                            <option 
+                            key={temp.id} 
+                            value={temp.temperament} 
+                            >{temp.temperament}</option>
+                        ))}
+                    </select>
                     <input name="temperament" value={newDog.temperament} placeholder="Dog temperament" onChange={(e)=> validateDogT(e.target.value)}/>
                     {!errorT ? null : <span className="formError">{errorT}</span>}
                     <input name="image" value={newDog.image} placeholder="Dog image URL" onChange={(e)=> validateImageDog(e.target.value)}/>
@@ -133,22 +142,15 @@ const AddDog = ({getDogs, getTemperaments}) => {
     )
 }
 
+
+function mapStateToProps(state) {
+    return {
+      temperaments: state.temperaments
+    };
+}
+
 export default connect(
-    null,
+    mapStateToProps,
     {getDogs, getTemperaments }
   )(AddDog);
 
-// export default AddDog;
-// export default withRouter(AddDog);
-
-
-/*
-{
-    "name": "Siamese",
-    "weight": "12 - 16",
-    "height": "30 - 60",
-    "life_span": "infinite",
-    "temperament": "temperament",
-    "image": url"
-}
-*/
