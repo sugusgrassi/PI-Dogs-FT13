@@ -20,6 +20,7 @@
 
 .albumImage {
     max-width: 360px;
+    width: 100%;
 }
 
 .albumInfoContainer {
@@ -39,9 +40,6 @@
     }
     .albumInfoContainer {
         margin-left: 0px;
-    }
-    .albumImage {
-        max-width: 320px;
     }
     .albumContainer {
         width: 90%;

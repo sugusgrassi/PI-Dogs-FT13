@@ -46,6 +46,7 @@ font-family: 'Teko', sans-serif; */
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  padding: 0 16px;
 }
 
 .flexContainerRes {

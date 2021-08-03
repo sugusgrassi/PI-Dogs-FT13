@@ -98,14 +98,14 @@ const AddDog = ({getDogs, getTemperaments, temperaments}) => {
         // postdog(newDog) // Lo llevo a Redux?
         axios.post( POST_DOG_URL, newDog)
           .then(function (response) {
-            console.log(response);
+            // console.log(response);
           })
         //   getDogs("")
        history.push('/thanks');
     }
- console.log(newDog)
+//  console.log(newDog)
     const isEnabled = newDog.name.length > 0 && newDog.weight.length > 0 && newDog.life_span.length > 0 && newDog.temperament.length > 0 && newDog.image.length > 0;
-console.log(temperaments)
+// console.log(temperaments)
     // console.log(newDog.name)
     function toTitleCase(str) {
         return str.replace(
@@ -130,7 +130,7 @@ console.log(temperaments)
                     {!errorLS ? null : <span className="formError">{errorLS}</span>}
                     {/* <input name="temperament" value={newDog.temperament} placeholder="Dog temperament" onChange={(e)=> setNewDog(prevState =>
                         ({...prevState, temperament: [e.target.value]}))}/> */}
-                    <label style={{textAlign: "left"}}>Choose or create temperament:</label>
+                    <label style={{textAlign: "left", fontSize: "14px"}}>Choose or create a temperament:</label>
                     <select name="temperament" value={[newDog.temperament]} onChange={(e)=> validateDogT(toTitleCase(e.target.value))} multiple>
                         {temperaments?.map((temp) => (
                             <option 

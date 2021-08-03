@@ -38,8 +38,8 @@ function getAllDogs(req, res, next){
                 const limit = parseInt(req.query.limit)
                 const startIndex = (page - 1) * limit;
                 const endIndex = limit * page;
-                console.log(startIndex);
-                console.log(endIndex);
+                // console.log(startIndex);
+                // console.log(endIndex);
                 const result = filteredDogs.slice(startIndex, endIndex);
                 
                 return res.json(result);
@@ -64,8 +64,8 @@ function getAllDogs(req, res, next){
         const limit = parseInt(req.query.limit)
         const startIndex = (page - 1) * limit;
         const endIndex = limit * page;
-        console.log(startIndex);
-        console.log(endIndex);
+        // console.log(startIndex);
+        // console.log(endIndex);
         const result = whoLetTheDogsOut.slice(startIndex, endIndex);
         
         return res.json(result);

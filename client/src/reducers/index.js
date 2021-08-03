@@ -68,8 +68,8 @@ function rootReducer(state = initialState, action){
         }
     }
     if (action.type === API_DOGS) {
-        console.log("llama apidogs")
-        console.log(state.dogs.filter(dog => dog.id < 300))
+        // console.log("llama apidogs")
+        // console.log(state.dogs.filter(dog => dog.id < 300))
         return {
             ...state,
             dogs: state.apiDB,
@@ -78,8 +78,8 @@ function rootReducer(state = initialState, action){
         }
     }
     if (action.type === DB_DOGS) {
-        console.log("llama dbdogs")
-        console.log(state.dogs.filter(dog => dog.id.length > 1))
+        // console.log("llama dbdogs")
+        // console.log(state.dogs.filter(dog => dog.id.length > 1))
         return {
             ...state,
             dogs: state.apiDB,
@@ -88,7 +88,7 @@ function rootReducer(state = initialState, action){
         }
     }
     if (action.type === SET_DOG_API_DB) {
-        console.log("llama apiDB")
+        // console.log("llama apiDB")
         return {
             ...state,
             dogs: state.apiDB

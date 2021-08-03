@@ -31,6 +31,10 @@ nav {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    padding: 4px 0px;
+    /* border-bottom: 1px solid white; */
 }
 
 .is-active{
@@ -52,12 +56,7 @@ nav {
     }
 }
 
-.navLinks {
-    text-decoration: none;
-    color: rgb(0, 0, 0);
-    padding: 4px 0px;
-    border-bottom: 1px solid white;
-}
+
 
 .dogNavLink {
     display: flex;

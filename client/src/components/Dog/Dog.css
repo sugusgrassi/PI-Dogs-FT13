@@ -18,6 +18,7 @@
 
 .dogImage {
     max-width: 600px;
+    width: 100%;
 }
 
 
@@ -32,4 +33,16 @@ li {
 
 .dogInfoContainer {
     margin-left: 20px;
+}
+
+@media (max-width: 1052px) {
+    .dogInfoContainer {
+        margin-left: 0px;
+    }
+}
+
+.dogNameDetail {
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    color: black;
 }

@@ -11,9 +11,9 @@ const Nav = () => {
                 <img className={"rocketDog"} src={rocketDog} alt="rocket dog"/>
             </Link>
             <>
-                <NavLink className={"navLinks"} exact={true} activeClassName='is-active' to='/dogs'>Escaped Dogs</NavLink>
+                <NavLink className="navLinks" exact={true} activeClassName='is-active' to='/dogs'>Escaped Dogs</NavLink>
                 {/* <Link to='/temperaments'>Find Dog by temperament</Link> */}
-                <NavLink className={"navLinks"} exact={true} activeClassName='is-active' to='/add'>Add</NavLink>
+                <NavLink className="navLinks" exact={true} activeClassName='is-active' to='/add'>Add</NavLink>
             </>
         </nav>
     )   

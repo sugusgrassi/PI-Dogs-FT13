@@ -21,7 +21,7 @@ function Dog(props) {
             <div className="dogDetailContainer">
             <img className="dogImage" src={props.dogDetail.image} alt={props.dogDetail.name} />
             <div className="dogInfoContainer">
-                <h2 className="dogName" >{props.dogDetail.name}</h2>
+                <h2 className="dogNameDetail" >{props.dogDetail.name}</h2>
                 <ul className="dogList">
                     <li><strong>Height:</strong> {props.dogDetail.height ? (
                         props.dogDetail.height) : (
