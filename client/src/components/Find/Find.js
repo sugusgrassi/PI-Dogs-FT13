@@ -20,8 +20,7 @@ const Find = (props) => {
       }
 
       useEffect(() => {
-        // console.log("Se modificó el state")        
-        // props.setTempDog("")
+
         props.getDogsByName("?name="+breedName)
         // props.setdogApiDB()
         props.setTempDog("")
