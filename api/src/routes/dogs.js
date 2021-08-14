@@ -6,12 +6,5 @@ router.get('/', getAllDogs)
 
 router.get('/:id', dogById)
 
-// router.get('/', (req, res) => {
-//     console.log("llega")
-//     res.send("Dogs")
-// })
-
-// router.post('/', addDog)
-
 
 module.exports = router;

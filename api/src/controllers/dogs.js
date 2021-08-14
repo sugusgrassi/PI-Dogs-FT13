@@ -38,8 +38,7 @@ function getAllDogs(req, res, next){
                 const limit = parseInt(req.query.limit)
                 const startIndex = (page - 1) * limit;
                 const endIndex = limit * page;
-                // console.log(startIndex);
-                // console.log(endIndex);
+
                 const result = filteredDogs.slice(startIndex, endIndex);
                 
                 return res.json(result);
@@ -64,8 +63,7 @@ function getAllDogs(req, res, next){
         const limit = parseInt(req.query.limit)
         const startIndex = (page - 1) * limit;
         const endIndex = limit * page;
-        // console.log(startIndex);
-        // console.log(endIndex);
+
         const result = whoLetTheDogsOut.slice(startIndex, endIndex);
         
         return res.json(result);
@@ -96,7 +94,7 @@ async function dogById(req, res, next){
             }
         })
         } else {
-            console.log("La DB no lo tiene entonces vamos a la API")
+
             const response = await axios.get(`${BASE_URL}?api_key=${apiKey}`)
             for (var dog of response.data) {                
                 if (dog.id == req.params.id){

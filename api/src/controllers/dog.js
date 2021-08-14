@@ -64,7 +64,6 @@ async function addDog(req, res, next){
             id: ide2,
             temperament: temp
         });
-        console.log(createdTemperament)
  
         await createdDog.addTemperament(createdTemperament);
         // =
